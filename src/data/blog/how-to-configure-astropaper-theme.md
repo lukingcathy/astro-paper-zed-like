@@ -45,13 +45,15 @@ export const SITE = {
   dynamicOgImage: true, // enable automatic dynamic og-image generation
   lang: "en", // html lang code. Set this empty and default will be "en"
   timezone: "Asia/Bangkok", // Default global timezone (IANA format) https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
-} as const;
+}
+as
+const ;
 ```
 
 Here are SITE configuration options
 
 | Options               | Description                                                                                                                                                                                                                                                                                                                                                                                                                       |
-| --------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|-----------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `website`             | Your deployed website URL                                                                                                                                                                                                                                                                                                                                                                                                         |
 | `author`              | Your name                                                                                                                                                                                                                                                                                                                                                                                                                         |
 | `profile`             | Your personal/portfolio website URL which is used for better SEO. Put `null` or empty string `""` if you don't have any.                                                                                                                                                                                                                                                                                                          |
