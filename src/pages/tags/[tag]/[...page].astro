@@ -34,7 +34,7 @@ const { page, tagName } = Astro.props;
 
 <Layout title={`Tag: ${tagName} | ${SITE.title}`}>
   <PageLayout>
-    <div slot="main-container">
+    <div class="pt-8" slot="main-container">
       <Main
         pageTitle={[`Tag:`, `${tagName}`]}
         titleTransition={tag}
@@ -42,8 +42,7 @@ const { page, tagName } = Astro.props;
       >
         <h1 slot="title" transition:name={tag}>{`Tag:${tag}`}</h1>
         <ul>
-          {page.data.map(data =>
-            <Card {...data} />)}
+          {page.data.map(data => <Card {...data} />)}
         </ul>
       </Main>
 

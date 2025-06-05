@@ -14,11 +14,10 @@ let tags = getUniqueTags(posts);
 
 <Layout title={`Tags | ${SITE.title}`}>
   <PageLayout>
-    <div slot="main-container">
+    <div class="pt-8" slot="main-container">
       <Main pageTitle="Tags" pageDesc="All the tags used in posts.">
         <ul>
-          {tags.map(({ tag, tagName }) =>
-            <Tag {tag} {tagName} size="lg" />)}
+          {tags.map(({ tag, tagName }) => <Tag {tag} {tagName} size="lg" />)}
         </ul>
       </Main>
     </div>
