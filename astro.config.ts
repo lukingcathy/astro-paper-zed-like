@@ -1,4 +1,4 @@
-import { defineConfig } from "astro/config";
+import { defineConfig, envField } from "astro/config";
 import tailwindcss from "@tailwindcss/vite";
 import sitemap from "@astrojs/sitemap";
 import remarkToc from "remark-toc";
@@ -41,6 +41,15 @@ export default defineConfig({
     // Used for all `<Image />` and `<Picture />` components unless overridden with a prop
     layout: "constrained",
     responsiveStyles: true,
+  },
+  env: {
+    schema: {
+      PUBLIC_GOOGLE_SITE_VERIFICATION: envField.string({
+        access: "public",
+        context: "client",
+        optional: true,
+      }),
+    },
   },
   experimental: {
     contentIntellisense: true,
