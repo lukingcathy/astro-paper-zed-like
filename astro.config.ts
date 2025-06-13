@@ -3,6 +3,11 @@ import tailwindcss from "@tailwindcss/vite";
 import sitemap from "@astrojs/sitemap";
 import remarkToc from "remark-toc";
 import remarkCollapse from "remark-collapse";
+import {
+  transformerNotationDiff,
+  transformerNotationHighlight,
+  transformerNotationWordHighlight,
+} from "@shikijs/transformers";
 import { remarkMermaid } from "./src/plugins/mermaid.ts";
 import { SITE } from "./src/config.ts";
 
@@ -27,7 +32,13 @@ export default defineConfig({
     shikiConfig: {
       // For more themes, visit https://shiki.style/themes
       themes: { light: "min-light", dark: "night-owl" },
-      wrap: true,
+      defaultColor: false,
+      wrap: false,
+      transformers: [
+        transformerNotationDiff({ matchAlgorithm: "v3" }),
+        transformerNotationHighlight(),
+        transformerNotationWordHighlight(),
+      ],
     },
   },
   vite: {
