@@ -59,7 +59,7 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### Fix
 
-- ignore  in eslint
+- ignore in eslint
 - update blog table padding
 - remove unused back url in the card url
 - show light/dark button according to site setting
@@ -235,12 +235,11 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### Others
 
-* adds blog post for how to add a social icon ([#221](https://github.com/satnaing/astro-paper/issues/221)) 
+* adds blog post for how to add a social icon ([#221](https://github.com/satnaing/astro-paper/issues/221))
 * updates the hook post with a smarter updateHook ([#222](https://github.com/satnaing/astro-paper/issues/222))
 * update breadcrumbs delimiter to "»" ([#213](https://github.com/satnaing/astro-paper/issues/213))
 
 ## [4.0.0](https://github.com/satnaing/astro-paper/compare/v3.0.0...v4.0.0) (2024-01-04)
-
 
 ### ⚠ BREAKING CHANGES
 
@@ -264,7 +263,6 @@ All notable changes to this project will be documented in this file. See [standa
 * replace slugified title with unslugified tag name ([#198](https://github.com/satnaing/astro-paper/issues/198)) ([b05b8fb](https://github.com/satnaing/astro-paper/commit/b05b8fb842b43f4f6462b425cb46d835579cbcfb)), closes [#179](https://github.com/satnaing/astro-paper/issues/179)
 * support custom canonical URLs ([#83](https://github.com/satnaing/astro-paper/issues/83)) ([4687bd5](https://github.com/satnaing/astro-paper/commit/4687bd516b16970fc4d163c1202b28f29818a582))
 * update theme-color tag on theme switch ([f253776](https://github.com/satnaing/astro-paper/commit/f25377674ebc10f496ef6e5729b931d61ec67832))
-
 
 ### Bug Fixes
 
@@ -302,12 +300,11 @@ All notable changes to this project will be documented in this file. See [standa
 * upgrade to astro v3 ([8fda50f](https://github.com/satnaing/astro-paper/commit/8fda50f5ddb7130b7954ad217eed1848094ee33c)), closes [#111](https://github.com/satnaing/astro-paper/issues/111)
 * add view transitions for card on search page ([#118](https://github.com/satnaing/astro-paper/issues/118)) ([b873ed5](https://github.com/satnaing/astro-paper/commit/b873ed5a07e746404960690669e8960c2a4c628d))
 * add ViewTransitions from Astro ([9703e54](https://github.com/satnaing/astro-paper/commit/9703e54ca4264b0437e06c45bbcc53a7a7d1e106)), closes [#96](https://github.com/satnaing/astro-paper/issues/96)
-([b873ed5](https://github.com/satnaing/astro-paper/commit/b873ed5a07e746404960690669e8960c2a4c628d)), closes [#96](https://github.com/satnaing/astro-paper/issues/96)
+  ([b873ed5](https://github.com/satnaing/astro-paper/commit/b873ed5a07e746404960690669e8960c2a4c628d)), closes [#96](https://github.com/satnaing/astro-paper/issues/96)
 * generate OG image using templates ([0f82206](https://github.com/satnaing/astro-paper/commit/0f822060cec82b218b568e9ef311fe6adc8b7a1e))
 * support custom canonical URLs ([#83](https://github.com/satnaing/astro-paper/issues/83)) ([4687bd5](https://github.com/satnaing/astro-paper/commit/4687bd516b16970fc4d163c1202b28f29818a582))
 * update theme-color tag on theme switch ([b5f5418](https://github.com/satnaing/astro-paper/commit/b5f54180c8645113ae4e177f3ebb97e1947dc9e2))
 * use new og images in layout ([ec3c691](https://github.com/satnaing/astro-paper/commit/ec3c69114f7344b27797853e2e5a573feb5c63fc))
-
 
 ### Bug Fixes
 
@@ -322,11 +319,9 @@ All notable changes to this project will be documented in this file. See [standa
 
 ## [2.3.0](https://github.com/satnaing/astro-paper/compare/v2.2.0...v2.3.0) (2023-05-15)
 
-
 ### Features
 
 * add locale configuration for Datetime component ([#59](https://github.com/satnaing/astro-paper/issues/59)) ([0e9f709](https://github.com/satnaing/astro-paper/commit/0e9f709c5dbd9a75aaf33e7994e88216fd56d8be))
-
 
 ### Bug Fixes
 
@@ -342,11 +337,9 @@ All notable changes to this project will be documented in this file. See [standa
 
 ## [2.2.0](https://github.com/satnaing/astro-paper/compare/v2.1.0...v2.2.0) (2023-03-16)
 
-
 ### Features
 
 * generate og images in png format ([#43](https://github.com/satnaing/astro-paper/issues/43)) ([27507d1](https://github.com/satnaing/astro-paper/commit/27507d1d78531901c20a17d9ce72728c6cbb521e)), closes [#40](https://github.com/satnaing/astro-paper/issues/40)
-
 
 ### Bug Fixes
 
@@ -361,11 +354,9 @@ All notable changes to this project will be documented in this file. See [standa
 
 ## [2.1.0](https://github.com/satnaing/astro-paper/compare/v2.0.0...v2.1.0) (2023-02-08)
 
-
 ### Features
 
 * add ESLint and update linting errors ([#26](https://github.com/satnaing/astro-paper/issues/26)) ([a9631d0](https://github.com/satnaing/astro-paper/commit/a9631d0e1e65ac4339c6b4d806b3a17928fa2b62))
-
 
 ### Bug Fixes
 
@@ -374,7 +365,6 @@ All notable changes to this project will be documented in this file. See [standa
 * update dependencies
 
 ## [2.0.0](https://github.com/satnaing/astro-paper/compare/v1.4.0...v2.0.0) (2023-01-31)
-
 
 ### ⚠ BREAKING CHANGES
 
@@ -388,7 +378,6 @@ Check the AstroPaper v2 in [this blog post](https://astro-paper.pages.dev/posts/
 * add new predefined color scheme 'astro dark' ([bc263b6](https://github.com/satnaing/astro-paper/commit/bc263b6eac00fbc8ec62481f2ec0317ee11bc83a))
 * define blog schema and add blog collection ([b420e68](https://github.com/satnaing/astro-paper/commit/b420e688ca3a197a7e4ea2591193fd09da817ec7))
 
-
 ### Bug Fixes
 
 * add embedFont option for Satori ([9322123](https://github.com/satnaing/astro-paper/commit/93221239ddaebaa9ab183871cf978548ea8d0ea5))
@@ -401,18 +390,15 @@ Check the AstroPaper v2 in [this blog post](https://astro-paper.pages.dev/posts/
 * update card bg color ([8a99601](https://github.com/satnaing/astro-paper/commit/8a99601e93f90c0870a22aa4a8ea8b7ff1b76a98))
 * use default-og for twitter card ([9434d85](https://github.com/satnaing/astro-paper/commit/9434d850e1f41f0802de5706c4c5712e5b5def9d))
 
-
 ### build
 
 * **deps:** bump astro and its packages to v2 ([5f279b3](https://github.com/satnaing/astro-paper/commit/5f279b34f88bd94bed820d16c1e1d5e95859045f))
 
 ## [1.4.0](https://github.com/satnaing/astro-paper/compare/v1.3.0...v1.4.0) (2022-12-28)
 
-
 ### Features
 
 * generate dynamic og image for blog posts ([#15](https://github.com/satnaing/astro-paper/issues/15)) ([ce3f1dc](https://github.com/satnaing/astro-paper/commit/ce3f1dc4a0df8f196dce37de1c976870e9c97279))
-
 
 ### Bug Fixes
 
@@ -420,13 +406,11 @@ Check the AstroPaper v2 in [this blog post](https://astro-paper.pages.dev/posts/
 
 ## [1.3.0](https://github.com/satnaing/astro-paper/compare/v1.2.1...v1.3.0) (2022-12-07)
 
-
 ### Features
 
 * update mobile nav to be accessible ([46ea4aa](https://github.com/satnaing/astro-paper/commit/46ea4aa49a49a3d21ca5ce1cee1b51f0108c13f0))
 
 ### [1.2.1](https://github.com/satnaing/astro-paper/compare/v1.2.0...v1.2.1) (2022-12-02)
-
 
 ### Bug Fixes
 
@@ -438,31 +422,27 @@ Check the AstroPaper v2 in [this blog post](https://astro-paper.pages.dev/posts/
 
 ## [1.2.0](https://github.com/satnaing/astro-paper/compare/v1.1.3...v1.2.0) (2022-11-28)
 
-
 ### Features
 
 * improve accessibility including voiceover ([5860254](https://github.com/satnaing/astro-paper/commit/5860254ea99996e466f2e521f033763961b6faa6))
 * add linkTitle in social links ([c9f796f](https://github.com/satnaing/astro-paper/commit/c9f796f4e63f1cf6b32b7874ae5e3810598a230c))
 
-
 ### Updates
 
-* move toggle theme codes from `layouts/Layout.astro` to `toggle-theme.js` ([5860254](https://github.com/satnaing/astro-paper/commit/5860254ea99996e466f2e521f033763961b6faa6))
+* move toggle theme codes from `layouts/Layout.astro` to `toggle-theme.ts` ([5860254](https://github.com/satnaing/astro-paper/commit/5860254ea99996e466f2e521f033763961b6faa6))
 * delete `utils/formatDatetime.ts` and replaced with `FormattedDatetime` inside `components/Datetime.tsx` ([0eeed8e](https://github.com/satnaing/astro-paper/commit/0eeed8e870781d9b4a447c51e3055ccb2f359d8a))
-* 'toggling light and dark mode' code is remove from `src/components/Header.astro` and is rewritten in `public/toggle-theme.js` file. ([2ba459b](https://github.com/satnaing/astro-paper/commit/2ba459b4131a11a68a5fd818a278c474c1888cde)) ([0eeed8e](https://github.com/satnaing/astro-paper/commit/0eeed8e870781d9b4a447c51e3055ccb2f359d8a))
+* 'toggling light and dark mode' code is remove from `src/components/Header.astro` and is rewritten in `public/toggle-theme.ts` file. ([2ba459b](https://github.com/satnaing/astro-paper/commit/2ba459b4131a11a68a5fd818a278c474c1888cde)) ([0eeed8e](https://github.com/satnaing/astro-paper/commit/0eeed8e870781d9b4a447c51e3055ccb2f359d8a))
 * update previous and next button disabled state ([408fc4c](https://github.com/satnaing/astro-paper/commit/408fc4c7aa5a246fe82a6e85d119b36ee1f1ffc3))
 * **typo:** rename Linkedin to LinkedIn ([307b55f](https://github.com/satnaing/astro-paper/commit/307b55ff0f6cb86a4fa4152c635d6acb39d1512f))
 * update patch and minor dependencies ([3b0ab75](https://github.com/satnaing/astro-paper/commit/3b0ab7555f506a8a0b825ca9691fdb221e481adb)) ([c3a6e4e](https://github.com/satnaing/astro-paper/commit/c3a6e4e81d1f79efc17d451486ff560dccb8ddf0))
 
 ### [1.1.3](https://github.com/satnaing/astro-paper/compare/v1.1.2...v1.1.3) (2022-11-11)
 
-
 ### Bug Fixes
 
 * fix broken post links and hide draft posts in rss feed ([b83c906](https://github.com/satnaing/astro-paper/commit/b83c906262cb5e1f045ac50f2401527c0b64074c))
 
 ### [1.1.2](https://github.com/satnaing/astro-paper/compare/v1.1.1...v1.1.2) (2022-11-04)
-
 
 ### Bug Fixes
 
@@ -471,7 +451,6 @@ Check the AstroPaper v2 in [this blog post](https://astro-paper.pages.dev/posts/
 * show search result only if input is more than one char ([f7fb032](https://github.com/satnaing/astro-paper/commit/f7fb032e604bd704adc19400e000c9584a6fdb43))
 
 ### [1.1.1](https://github.com/satnaing/astro-paper/compare/v1.1.0...v1.1.1) (2022-10-30)
-
 
 ### Updates
 

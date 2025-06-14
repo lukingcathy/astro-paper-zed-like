@@ -148,7 +148,7 @@ All commands are run from the root of the project, from a terminal:
 > **_Note!_** For `Docker` commands we must have it [installed](https://docs.docker.com/engine/install/) in your machine.
 
 | Command                              | Action                                                                                                                           |
-| :----------------------------------- | :------------------------------------------------------------------------------------------------------------------------------- |
+|:-------------------------------------|:---------------------------------------------------------------------------------------------------------------------------------|
 | `pnpm install`                       | Installs dependencies                                                                                                            |
 | `pnpm run dev`                       | Starts local dev server at `localhost:4321`                                                                                      |
 | `pnpm run build`                     | Build your production site to `./dist/`                                                                                          |

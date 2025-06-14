@@ -104,7 +104,7 @@ Colors are declared in CSS custom property (CSS Variable) notation. Color proper
 Here is the detail explanation of color properties.
 
 | Color Property       | Definition & Usage                                         |
-| -------------------- | ---------------------------------------------------------- |
+|----------------------|------------------------------------------------------------|
 | `--color-fill`       | Primary color of the website. Usually the main background. |
 | `--color-text-base`  | Secondary color of the website. Usually the text color.    |
 | `--color-accent`     | Accent color of the website. Link color, hover color etc.  |
