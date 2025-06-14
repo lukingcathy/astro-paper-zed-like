@@ -83,13 +83,13 @@ const nextPost =
 <Layout {...layoutProps}>
   <PageLayout>
     <section
-      class="relative flex flex-col justify-center-safe w-full"
+      class="relative flex w-full flex-col justify-center-safe"
       id="main-content"
       slot="main-body-slot"
     >
       <div
         id="content-header"
-        class="sticky top-[var(--header-height)] z-40 my-4 pt-4 bg-background"
+        class="sticky top-[var(--header-height)] z-40 my-4 bg-background pt-4"
       >
         <BackButton />
         <div
@@ -120,7 +120,7 @@ const nextPost =
       <div
         id="content-body-main"
         class:list={[
-          "relative overflow-x-visible md:overflow-auto w-full md:h-lvh mx-auto px-4 md:mx-3 md:mr-auto bg-background",
+          "relative mx-auto w-full overflow-x-visible bg-background px-4 md:mx-3 md:mr-auto md:h-lvh md:overflow-auto",
           { "mt-8": !SITE.showBackButton },
         ]}
         data-pagefind-article
@@ -346,7 +346,9 @@ const nextPost =
     /** Scrolls the document to the top when
       * the "Back to Top" button is clicked. */
       function backToTopSidebar() {
-      document.querySelector("#back-to-top-sidebar")?.addEventListener("click", () => {
+      document
+        .querySelector("#back-to-top-sidebar")
+        ?.addEventListener("click", () => {
         const element = document.querySelector("#content-body-main");
         if (element) {
           element.scrollTop = 0;
