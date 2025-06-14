@@ -3,6 +3,12 @@
 
 @custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
 
+:root {
+  --header-height: 64px;
+  --footer-height: 56px;
+  --content-header: 112px;
+}
+
 :root,
 html[data-theme="light"] {
   --background: #fdfdfd;
@@ -36,7 +42,7 @@ html[data-theme="dark"] {
   }
 
   html {
-    @apply overflow-y-scroll scroll-smooth;
+    @apply overflow-auto overscroll-contain scroll-smooth;
   }
 
   body {

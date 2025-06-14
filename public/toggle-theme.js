@@ -5,10 +5,14 @@ const currentTheme = localStorage.getItem("theme");
 
 function getPreferTheme() {
   // return theme value in local storage if it is set
-  if (currentTheme) return currentTheme;
+  if (currentTheme) {
+    return currentTheme;
+  }
 
   // return primary color scheme if it is set
-  if (primaryColorScheme) return primaryColorScheme;
+  if (primaryColorScheme) {
+    return primaryColorScheme;
+  }
 
   // return user device's prefer color scheme
   return window.matchMedia("(prefers-color-scheme: dark)").matches
@@ -25,8 +29,15 @@ function setPreference() {
 
 function reflectPreference() {
   document.firstElementChild.setAttribute("data-theme", themeValue);
-
   document.querySelector("#theme-btn")?.setAttribute("aria-label", themeValue);
+
+  const menuThemeBtn = document.querySelector("#menu-theme-btn");
+  if (menuThemeBtn) {
+    const label =
+      themeValue === "light" ? "Turn Light Mode On" : "Turn Dark Mode On";
+    menuThemeBtn.setAttribute("aria-label", label);
+    menuThemeBtn.textContent = label;
+  }
 
   // Get a reference to the body element
   const body = document.body;
@@ -51,14 +62,21 @@ reflectPreference();
 
 window.onload = () => {
   function setThemeFeature() {
-    // set on load so screen readers can get the latest value on the button
+    // set on load so screen readers can get the latest value on the button.
     reflectPreference();
 
-    // now this script can find and listen for clicks on the control
-    document.querySelector("#theme-btn")?.addEventListener("click", () => {
+    const theme_click_event = () => {
       themeValue = themeValue === "light" ? "dark" : "light";
       setPreference();
-    });
+    };
+
+    // now this script can find and listen for clicks on the control.
+    document
+      .querySelector("#theme-btn")
+      ?.addEventListener("click", theme_click_event);
+    document
+      .querySelector("#menu-theme-btn")
+      ?.addEventListener("click", theme_click_event);
   }
 
   setThemeFeature();

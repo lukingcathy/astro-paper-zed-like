@@ -1,0 +1,62 @@
+---
+import type { MarkdownHeading } from "astro";
+import IconArticle from "@/assets/icons/IconArticle.svg";
+import TocHeading from "./TocHeading.astro";
+export interface HeadingHierarchy extends MarkdownHeading {
+  subheadings: HeadingHierarchy[];
+}
+
+export interface Props {
+  headings: MarkdownHeading[];
+}
+
+function buildHeadingHierarchy(
+  headings: MarkdownHeading[]
+): HeadingHierarchy[] {
+  const headingHierarchies: HeadingHierarchy[] = [];
+  const headingMap: Map<number, HeadingHierarchy> = new Map();
+
+  if (!headings || headings.length == 0) {
+    return headingHierarchies;
+  }
+
+  headings.forEach(entry => {
+    const heading = { ...entry, subheadings: [] };
+    headingMap.set(heading.depth, heading);
+    if (heading.depth === 2) {
+      headingHierarchies.push(heading);
+    } else {
+      const headingHierarchy = headingMap.get(heading.depth - 1);
+      if (headingHierarchy) {
+        headingHierarchy.subheadings.push(heading);
+      }
+    }
+  });
+
+  return headingHierarchies;
+}
+
+const { headings } = Astro.props;
+
+const toc = buildHeadingHierarchy(headings);
+
+const hasToc = toc.length > 0;
+---
+
+<>
+  {
+    hasToc && (
+      <nav>
+        <div class="flex">
+          <IconArticle />
+          <span>On This Page</span>
+        </div>
+        <ul>
+          {toc.map(heading => (
+            <TocHeading heading={heading} />
+          ))}
+        </ul>
+      </nav>
+    )
+  }
+</>

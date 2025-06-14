@@ -23,7 +23,7 @@ const recentPosts = sortedPosts.filter(({ data }) => !data.featured);
 
 <Layout>
   <PageLayout>
-    <div slot="main-container">
+    <div slot="main-body-slot">
       <section id="hero" class="pt-8 pb-6">
         <h1 class="my-4 inline-block text-4xl font-bold sm:my-8 sm:text-5xl">
           Mingalaba
@@ -45,9 +45,9 @@ const recentPosts = sortedPosts.filter(({ data }) => !data.featured);
 
         <p>
           AstroPaper is a minimal, responsive, accessible and SEO-friendly Astro
-          blog theme. This theme follows best practices and provides accessibility
-          out of the box. Light and dark mode are supported by default. Moreover,
-          additional color schemes can also be configured.
+          blog theme. This theme follows best practices and provides
+          accessibility out of the box. Light and dark mode are supported by
+          default. Moreover, additional color schemes can also be configured.
         </p>
         <p class="mt-2">
           Read the blog posts or check
@@ -64,7 +64,9 @@ const recentPosts = sortedPosts.filter(({ data }) => !data.featured);
 
           SOCIALS.length > 0 && (
             <div class="mt-4 flex flex-col sm:flex-row sm:items-center">
-              <div class="mr-2 mb-1 whitespace-nowrap sm:mb-0">Social Links:</div>
+              <div class="mr-2 mb-1 whitespace-nowrap sm:mb-0">
+                Social Links:
+              </div>
               <Socials />
             </div>
           )
@@ -84,8 +86,7 @@ const recentPosts = sortedPosts.filter(({ data }) => !data.featured);
                 ))}
               </ul>
             </section>
-            {recentPosts.length > 0 &&
-              <Hr />}
+            {recentPosts.length > 0 && <Hr />}
           </>
         )
       }
@@ -97,8 +98,7 @@ const recentPosts = sortedPosts.filter(({ data }) => !data.featured);
             <ul>
               {recentPosts.map(
                 (data, index) =>
-                  index < SITE.postPerIndex &&
-                  <Card variant="h3" {...data} />,
+                  index < SITE.postPerIndex && <Card variant="h3" {...data} />
               )}
             </ul>
           </section>

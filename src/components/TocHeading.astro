@@ -1,0 +1,23 @@
+---
+import type { HeadingHierarchy } from "./Toc.astro";
+export interface Props {
+  heading: HeadingHierarchy;
+}
+
+const { heading } = Astro.props;
+---
+
+<li>
+  <a href={"#" + heading.slug}>
+    <span>{heading.text}</span>
+  </a>
+  {
+    heading.subheadings.length > 0 && (
+      <ul>
+        {heading.subheadings.map(subheading => (
+          <Astro.self heading={subheading} />
+        ))}
+      </ul>
+    )
+  }
+</li>

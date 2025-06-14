@@ -5,15 +5,17 @@ import Footer from "@/components/Footer.astro";
 
 <Header />
 <slot name="breadcrumb" />
-<main class="relative mx-3 pt-8 grow border-r border-l md:mx-8 lg:mx-12">
-  <slot name="main-container" />
-  <div
-    class="absolute bottom-[-4.5px] left-[-4.5px] z-50 h-2 w-2 rotate-45 rounded-[1px] border border-blue-200 bg-white dark:border-blue-300/25"
-  >
-  </div>
-  <div
-    class="absolute right-[-4.5px] bottom-[-4.5px] z-50 h-2 w-2 rotate-45 rounded-[1px] border border-blue-200 bg-white dark:border-blue-300/25"
-  >
-  </div>
+<main class="relative mx-3 grow border-x pt-8 md:mx-8 lg:mx-12">
+  <slot name="main-body-slot" />
+  <section class="-mx-3 flex items-center justify-center md:-mx-8 lg:-mx-12">
+    <div
+      class="absolute bottom-[-4.5px] left-[-4.5px] z-50 h-2 w-2 rotate-45 rounded-[1px] border border-blue-200 bg-white dark:border-blue-300/25"
+    >
+    </div>
+    <div
+      class="absolute right-[-4.5px] bottom-[-4.5px] z-50 h-2 w-2 rotate-45 rounded-[1px] border border-blue-200 bg-white dark:border-blue-300/25"
+    >
+    </div>
+  </section>
 </main>
 <Footer />

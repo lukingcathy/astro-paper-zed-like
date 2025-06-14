@@ -8,14 +8,20 @@ export interface Props {
 }
 ---
 
-<footer class="flex w-full max-w-full border-t">
-  <div class="relative flex mx-3 w-full border-x px-4 md:mx-8 lg:mx-12">
+<footer class="relative z-20 flex w-full max-w-full border-t bg-background">
+  <div
+    id="foot-container"
+    class="relative mx-3 flex w-full border-x px-4 md:mx-8 lg:mx-12"
+  >
     <div
-      class="relative flex w-full flex-col md:flex-row items-center justify-between py-6 bg-background p-4 md:py-6">
-      <div class="my-2 flex flex-col items-center whitespace-nowrap sm:flex-row">
-        <span>Copyright &#169; {currentYear}</span>
-        <span class="hidden sm:inline">&nbsp;|&nbsp;</span>
-        <span>All rights reserved.</span>
+      class="relative mx-auto flex w-full flex-1 flex-row items-center-safe justify-between bg-background"
+    >
+      <div
+        class="flew-1 flex size-4 scale-75 flex-row items-center whitespace-nowrap sm:size-6 sm:scale-90"
+      >
+        <span class="text-sm md:text-xl">Copyright &#169; {currentYear}</span>
+        <span class="text-sm md:text-xl">&nbsp;|&nbsp;</span>
+        <span class="text-sm md:text-xl">All rights reserved.</span>
       </div>
       <Socials centered />
     </div>

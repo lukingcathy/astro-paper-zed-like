@@ -1,0 +1,26 @@
+---
+import IconChevronRightPipe from "@/assets/icons/IconChevronRightPipe.svg";
+export interface Props {
+  id?: string;
+  href: string;
+  class?: string;
+  ariaLabel?: string;
+  title?: string;
+}
+
+const { id, href, class: className = "", ariaLabel, title } = Astro.props;
+---
+
+<a
+  id={id}
+  {href}
+  class:list={[
+    "group fv-style dark:text-offgray-50 hover:bg-offgray-100/50 dark:hover:bg-offgray-500/10 flex h-8 items-center justify-center gap-3 rounded-sm border border-transparent px-2 text-base tracking-tight text-nowrap transition-colors duration-75 select-none disabled:cursor-not-allowed disabled:opacity-50",
+    className,
+  ]}
+  aria-label={ariaLabel}
+  title={title}
+>
+  <slot />
+  <IconChevronRightPipe class:list={"ml-auto"} />
+</a>

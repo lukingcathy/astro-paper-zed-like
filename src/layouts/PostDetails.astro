@@ -2,8 +2,8 @@
 import { render, type CollectionEntry } from "astro:content";
 import Layout from "@/layouts/Layout.astro";
 import PageLayout from "@/layouts/PageLayout.astro";
-import Footer from "@/components/Footer.astro";
 import Tag from "@/components/Tag.astro";
+import Toc from "@/components/Toc.astro";
 import Datetime from "@/components/Datetime.astro";
 import EditPost from "@/components/EditPost.astro";
 import ShareLinks from "@/components/ShareLinks.astro";
@@ -34,7 +34,7 @@ const {
   hideEditPost,
 } = post.data;
 
-const { Content } = await render(post);
+const { Content, headings } = await render(post);
 
 let ogImageUrl: string | undefined;
 
@@ -82,202 +82,282 @@ const nextPost =
 
 <Layout {...layoutProps}>
   <PageLayout>
-    <div class="relative mx-3 grow border-r border-l md:mx-8 lg:mx-12" slot="breadcrumb">
-      <BackButton />
-    </div>
-    <div id="main-content" class:list={[
-      "mx-auto w-full max-w-3xl px-4 pb-12",
-      { "mt-8": !SITE.showBackButton },
-    ]} data-pagefind-body slot="main-container">
-      <h1 transition:name={slugifyStr(title)} class="inline-block text-2xl font-bold text-accent sm:text-3xl">
-        {title}
-      </h1>
-      <div class="flex items-center gap-4">
-        <Datetime {pubDatetime} {modDatetime} {timezone} size="lg" class="my-2" />
-        <EditPost class="max-sm:hidden" {hideEditPost} {post} />
+    <section
+      class="relative flex flex-col justify-center-safe w-full"
+      id="main-content"
+      slot="main-body-slot"
+    >
+      <div
+        id="content-header"
+        class="sticky top-[var(--header-height)] z-40 my-4 pt-4 bg-background"
+      >
+        <BackButton />
+        <div
+          class:list={[
+            "mx-auto px-4 pt-2 pb-8 md:mx-3 md:mr-auto",
+            { "mt-8": !SITE.showBackButton },
+          ]}
+          data-pagefind-title
+        >
+          <h1
+            transition:name={slugifyStr(title)}
+            class="inline-block text-2xl font-bold text-accent sm:text-3xl"
+          >
+            {title}
+          </h1>
+          <div class="flex items-center gap-4">
+            <Datetime
+              {pubDatetime}
+              {modDatetime}
+              {timezone}
+              size="lg"
+              class="my-2"
+            />
+            <EditPost class="max-sm:hidden" {hideEditPost} {post} />
+          </div>
+        </div>
       </div>
-      <article id="article" class="mx-auto prose mt-8 max-w-3xl">
-        <Content />
-      </article>
+      <div
+        id="content-body-main"
+        class:list={[
+          "relative overflow-x-visible md:overflow-auto w-full md:h-lvh mx-auto px-4 md:mx-3 md:mr-auto bg-background",
+          { "mt-8": !SITE.showBackButton },
+        ]}
+        data-pagefind-article
+      >
+        <article
+          id="article"
+          class="prose sm:prose-sm lg:prose-lg xl:prose-xl dark:prose-invert"
+        >
+          <Content />
+        </article>
+        <div class="sm:hidden">
+          <hr class="my-8 border-dashed" />
+          <EditPost {hideEditPost} {post} />
 
-      <hr class="my-8 border-dashed" />
+          <ul class="mt-4 mb-8 sm:my-8">
+            {tags.map(tag =>
+              <Tag tag={slugifyStr(tag)} tagName={tag} />)}
+          </ul>
 
-      <EditPost class="sm:hidden" {hideEditPost} {post} />
+          <div class="flex flex-col items-center justify-between gap-6">
+            <ShareLinks />
 
-      <ul class="mt-4 mb-8 sm:my-8">
-        {tags.map(tag =>
-          <Tag tag={slugifyStr(tag)} tagName={tag} />)}
-      </ul>
-
-      <div class="flex flex-col items-center justify-between gap-6 sm:flex-row sm:items-end sm:gap-4">
-        <ShareLinks />
-
-        <button id="back-to-top" class="focus-outline py-1 whitespace-nowrap hover:opacity-75">
-          <IconChevronLeft class="inline-block rotate-90" />
-          <span>Back to Top</span>
-        </button>
-      </div>
-
-      <hr class="my-6 border-dashed" />
-
-      <!-- Previous/Next Post Buttons -->
-      <div data-pagefind-ignore class="grid grid-cols-1 gap-6 sm:grid-cols-2">
-        {
-          prevPost && (
-            <a
-              href={`/posts/${prevPost.slug}`}
-              class="flex w-full gap-1 hover:opacity-75"
+            <button
+              id="back-to-top"
+              class="focus-outline py-1 whitespace-nowrap hover:opacity-75"
             >
-              <IconChevronLeft class="inline-block flex-none" />
-              <div>
-                <span>Previous Post</span>
-                <div class="text-sm text-accent/85">{prevPost.title}</div>
-              </div>
-            </a>
-          )
-        }
-        {
-          nextPost && (
-            <a
-              href={`/posts/${nextPost.slug}`}
-              class="flex w-full justify-end gap-1 text-right hover:opacity-75 sm:col-start-2"
-            >
-              <div>
-                <span>Next Post</span>
-                <div class="text-sm text-accent/85">{nextPost.title}</div>
-              </div>
-              <IconChevronRight class="inline-block flex-none" />
-            </a>
-          )
-        }
+              <IconChevronLeft class="inline-block rotate-90" />
+              <span>Back to Top</span>
+            </button>
+          </div>
+          <hr class="my-6 border-dashed" />
+        </div>
+        <!-- Previous/Next Post Buttons -->
+        <div
+          class="grid grid-cols-1 gap-6 py-6 text-lg sm:grid-cols-2"
+          data-pagefind-ignore
+        >
+          {
+            prevPost && (
+              <a
+                href={`/posts/${prevPost.slug}`}
+                class="flex w-full gap-1 hover:-top-0.5 hover:text-accent/85 focus-visible:p-1"
+              >
+                <IconChevronLeft class="inline-block size-12 flex-none justify-center" />
+                <div>
+                  <span>Previous Post</span>
+                  <div class="text-sm text-accent/85">{prevPost.title}</div>
+                </div>
+              </a>
+            )
+          }
+          {
+            nextPost && (
+              <a
+                href={`/posts/${nextPost.slug}`}
+                class="flex w-full justify-end gap-1 text-right hover:-top-0.5 hover:text-accent/85 focus-visible:p-1 sm:col-start-2"
+              >
+                <div>
+                  <span>Next Post</span>
+                  <div class="text-sm text-accent/85">{nextPost.title}</div>
+                </div>
+                <IconChevronRight class="inline-block size-12 flex-none justify-center" />
+              </a>
+            )
+          }
+        </div>
       </div>
-    </div>
+    </section>
+    <aside
+      id="content-body-right-sidebar"
+      class="sticky top-[calc(var(--header-height)+40px)] z-50"
+      slot="main-sidebar-slot"
+    >
+      <Toc headings={headings} />
+      <hr class="my-6 w-2/3 border-dashed md:w-11/12" />
+      <ShareLinks />
+      <hr class="my-6 w-2/3 border-dashed md:w-11/12" />
+      <div
+        class="flex flex-col flex-wrap items-center justify-center gap-1 sm:items-start"
+      >
+        <span class="italic">Tags:</span>
+        <ul>
+          {tags.map(tag =>
+            <Tag tag={slugifyStr(tag)} tagName={tag} />)}
+        </ul>
+      </div>
+      <hr class="my-6 w-2/3 border-dashed md:w-11/12" />
+      <button
+        id="back-to-top-sidebar"
+        class="focus-outline py-1 whitespace-nowrap hover:opacity-75"
+      >
+        <IconChevronLeft class="inline-block rotate-90" />
+        <span>Back to Top</span>
+      </button>
+    </aside>
   </PageLayout>
 </Layout>
 
 <script is:inline data-astro-rerun>
   /** Create a progress indicator
-   *  at the top */
-  function createProgressBar() {
-    // Create the main container div
-    const progressContainer = document.createElement("div");
-    progressContainer.className =
-      "progress-container fixed top-0 z-10 h-1 w-full bg-background";
+    *  at the top */
+    function createProgressBar() {
+    const mainRightSidebar = document.querySelector("#content-header");
+    if (mainRightSidebar) {
+      // Create the main container div
+      const progressContainer = document.createElement("div");
+      progressContainer.className =
+        "progress-container absolute bottom-0 z-10 h-1 w-full bg-background md:pl-8";
 
-    // Create the progress bar div
-    const progressBar = document.createElement("div");
-    progressBar.className = "progress-bar h-1 w-0 bg-accent";
-    progressBar.id = "myBar";
+      // Create the progress bar div
+      const progressBar = document.createElement("div");
+      progressBar.className = "progress-bar h-1 w-0 bg-accent";
+      progressBar.id = "myBar";
 
-    // Append the progress bar to the progress container
-    progressContainer.appendChild(progressBar);
+      // Append the progress bar to the progress container
+      progressContainer.appendChild(progressBar);
 
-    // Append the progress container to the document body or any other desired parent element
-    document.body.appendChild(progressContainer);
-  }
+      // Append the progress container to the document body or any other desired parent element
+      mainRightSidebar.appendChild(progressContainer);
+      }
+    }
 
-  createProgressBar();
+    createProgressBar();
 
-  /** Update the progress bar
-   *  when user scrolls */
-  function updateScrollProgress() {
-    document.addEventListener("scroll", () => {
-      const winScroll =
-        document.body.scrollTop || document.documentElement.scrollTop;
-      const height =
-        document.documentElement.scrollHeight -
-        document.documentElement.clientHeight;
-      const scrolled = (winScroll / height) * 100;
-      if (document) {
-        const myBar = document.getElementById("myBar");
-        if (myBar) {
-          myBar.style.width = scrolled + "%";
+    /** Update the progress bar
+      *  when user scrolls */
+      function updateScrollProgress() {
+      document.addEventListener("scroll", () => {
+        const winScroll =
+          document.body.scrollTop || document.documentElement.scrollTop;
+        const height =
+          document.documentElement.scrollHeight -
+            document.documentElement.clientHeight;
+        const scrolled = (winScroll / height) * 100;
+        if (document) {
+          const myBar = document.getElementById("myBar");
+          if (myBar) {
+            myBar.style.width = scrolled + "%";
+            }
+          }
+        });
+      }
+
+    updateScrollProgress();
+
+    /** Attaches links to headings in the document,
+      *  allowing sharing of sections easily */
+      function addHeadingLinks() {
+      const headings = Array.from(
+        document.querySelectorAll("h2, h3, h4, h5, h6"),
+        );
+      for (const heading of headings) {
+        heading.classList.add("group");
+        const link = document.createElement("a");
+        link.className =
+          "heading-link ml-2 opacity-0 group-hover:opacity-100 focus:opacity-100";
+        link.href = "#" + heading.id;
+
+        const span = document.createElement("span");
+        span.ariaHidden = "true";
+        span.innerText = "#";
+        link.appendChild(span);
+        heading.appendChild(link);
         }
       }
-    });
-  }
 
-  updateScrollProgress();
+    addHeadingLinks();
 
-  /** Attaches links to headings in the document,
-   *  allowing sharing of sections easily */
-  function addHeadingLinks() {
-    const headings = Array.from(
-      document.querySelectorAll("h2, h3, h4, h5, h6"),
-    );
-    for (const heading of headings) {
-      heading.classList.add("group");
-      const link = document.createElement("a");
-      link.className =
-        "heading-link ml-2 opacity-0 group-hover:opacity-100 focus:opacity-100";
-      link.href = "#" + heading.id;
+    /** Attaches copy buttons to code blocks in the document,
+      * allowing users to copy code easily. */
+      function attachCopyButtons() {
+      const copyButtonLabel = "Copy";
+      const codeBlocks = Array.from(document.querySelectorAll("pre"));
 
-      const span = document.createElement("span");
-      span.ariaHidden = "true";
-      span.innerText = "#";
-      link.appendChild(span);
-      heading.appendChild(link);
-    }
-  }
+      for (const codeBlock of codeBlocks) {
+        const wrapper = document.createElement("div");
+        wrapper.style.position = "relative";
 
-  addHeadingLinks();
+        const copyButton = document.createElement("button");
+        copyButton.className =
+          "copy-code absolute right-3 -top-3 rounded bg-muted px-2 py-1 text-xs leading-4 text-foreground font-medium";
+        copyButton.innerHTML = copyButtonLabel;
+        codeBlock.setAttribute("tabindex", "0");
+        codeBlock.appendChild(copyButton);
 
-  /** Attaches copy buttons to code blocks in the document,
-   * allowing users to copy code easily. */
-  function attachCopyButtons() {
-    const copyButtonLabel = "Copy";
-    const codeBlocks = Array.from(document.querySelectorAll("pre"));
+        // wrap codebock with relative parent element
+        codeBlock?.parentNode?.insertBefore(wrapper, codeBlock);
+        wrapper.appendChild(codeBlock);
 
-    for (const codeBlock of codeBlocks) {
-      const wrapper = document.createElement("div");
-      wrapper.style.position = "relative";
+        copyButton.addEventListener("click", async () => {
+          await copyCode(codeBlock, copyButton);
+          });
+        }
 
-      const copyButton = document.createElement("button");
-      copyButton.className =
-        "copy-code absolute right-3 -top-3 rounded bg-muted px-2 py-1 text-xs leading-4 text-foreground font-medium";
-      copyButton.innerHTML = copyButtonLabel;
-      codeBlock.setAttribute("tabindex", "0");
-      codeBlock.appendChild(copyButton);
+      async function copyCode(block, button) {
+        const code = block.querySelector("code");
+        const text = code?.innerText;
 
-      // wrap codebock with relative parent element
-      codeBlock?.parentNode?.insertBefore(wrapper, codeBlock);
-      wrapper.appendChild(codeBlock);
+        await navigator.clipboard.writeText(text ?? "");
 
-      copyButton.addEventListener("click", async () => {
-        await copyCode(codeBlock, copyButton);
-      });
-    }
+        // visual feedback that task is completed
+        button.innerText = "Copied";
 
-    async function copyCode(block, button) {
-      const code = block.querySelector("code");
-      const text = code?.innerText;
+        setTimeout(() => {
+          button.innerText = copyButtonLabel;
+          }, 700);
+        }
+      }
 
-      await navigator.clipboard.writeText(text ?? "");
+    attachCopyButtons();
 
-      // visual feedback that task is completed
-      button.innerText = "Copied";
+    /** Scrolls the document to the top when
+      * the "Back to Top" button is clicked. */
+      function backToTop() {
+      document.querySelector("#back-to-top")?.addEventListener("click", () => {
+        document.body.scrollTop = 0; // For Safari
+        document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+        });
+      }
 
-      setTimeout(() => {
-        button.innerText = copyButtonLabel;
-      }, 700);
-    }
-  }
+    backToTop();
 
-  attachCopyButtons();
+    /** Scrolls the document to the top when
+      * the "Back to Top" button is clicked. */
+      function backToTopSidebar() {
+      document.querySelector("#back-to-top-sidebar")?.addEventListener("click", () => {
+        const element = document.querySelector("#content-body-main");
+        if (element) {
+          element.scrollTop = 0;
+          }
+        });
+      }
 
-  /** Scrolls the document to the top when
-   * the "Back to Top" button is clicked. */
-  function backToTop() {
-    document.querySelector("#back-to-top")?.addEventListener("click", () => {
-      document.body.scrollTop = 0; // For Safari
-      document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
-    });
-  }
+    backToTopSidebar();
 
-  backToTop();
-
-  /* Go to page start after page swap */
-  document.addEventListener("astro:after-swap", () =>
-    window.scrollTo({ left: 0, top: 0, behavior: "instant" }),
-  );
+    /* Go to page start after page swap */
+    document.addEventListener("astro:after-swap", () =>
+      window.scrollTo({ left: 0, top: 0, behavior: "instant" }),
+      );
 </script>
