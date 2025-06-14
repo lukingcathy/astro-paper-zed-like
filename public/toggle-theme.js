@@ -33,10 +33,12 @@ function reflectPreference() {
 
   const menuThemeBtn = document.querySelector("#menu-theme-btn");
   if (menuThemeBtn) {
-    const label =
-      themeValue === "light" ? "Turn Light Mode On" : "Turn Dark Mode On";
-    menuThemeBtn.setAttribute("aria-label", label);
-    menuThemeBtn.textContent = label;
+    const isLight = themeValue === "light";
+    const ariaLabel = isLight ? "Turn Light Mode On" : "Turn Dark Mode On";
+    menuThemeBtn.setAttribute("aria-label", ariaLabel);
+    menuThemeBtn.textContent = isLight
+      ? "Turn Dark Mode On"
+      : "Turn Light Mode On";
   }
 
   // Get a reference to the body element
