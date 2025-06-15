@@ -1,0 +1,91 @@
+---
+import IconArchive from "@/assets/icons/IconArchive.svg";
+import IconHome from "@/assets/icons/IconHome.svg";
+import IconNews from "@/assets/icons/IconNews.svg";
+import IconTags from "@/assets/icons/IconTags.svg";
+import IconUserExclamation from "@/assets/icons/IconUserExclamation.svg";
+import MenuLink from "./MenuLink.astro";
+import { SITE } from "@/config";
+import { isActivePage } from "@/utils/activePage";
+import { getCurrentPage } from "@/utils/activePage";
+
+const { pathname } = Astro.url;
+
+// Remove trailing slash from current url if exists
+const currentPath = getCurrentPage(pathname);
+
+const isActive = (path: string): boolean => {
+  return isActivePage(currentPath, path);
+};
+---
+
+<li>
+  <MenuLink
+    href="/"
+    class:list={{ "active-nav [&>svg]:stroke-accent": isActive("/") }}
+    ariaLabel="Go to the home page"
+    title="Go to the home page"
+  >
+    <IconHome />
+    Go to the home page
+  </MenuLink>
+  <hr class="my-2 dark:border-gray-600/20" />
+</li>
+<li>
+  <MenuLink
+    href="/posts"
+    class:list={{
+      "active-nav [&>svg]:stroke-accent": isActive("/posts"),
+    }}
+    ariaLabel="Posts"
+    title="Posts"
+  >
+    <IconNews />
+    Posts
+  </MenuLink>
+</li>
+<li>
+  <MenuLink
+    href="/tags"
+    class:list={{
+      "active-nav [&>svg]:stroke-accent": isActive("/tags"),
+    }}
+    ariaLabel="Tags"
+    title="Tags"
+  >
+    <IconTags />
+    Tags
+  </MenuLink>
+</li>
+<li>
+  <MenuLink
+    href="/about"
+    class:list={{
+      "active-nav [&>svg]:stroke-accent": isActive("/about"),
+    }}
+    ariaLabel="About"
+    title="About"
+  >
+    <IconUserExclamation />
+    About
+  </MenuLink>
+  {!SITE.showArchives && <hr class="my-2 dark:border-gray-600/20" />}
+</li>
+{
+  SITE.showArchives && (
+    <li>
+      <MenuLink
+        href="/archives"
+        class:list={{
+          "active-nav [&>svg]:stroke-accent": isActive("/archives"),
+        }}
+        ariaLabel="Archives"
+        title="Archives"
+      >
+        <IconArchive />
+        Archives
+      </MenuLink>
+      <hr class="my-2 dark:border-gray-600/20" />
+    </li>
+  )
+}

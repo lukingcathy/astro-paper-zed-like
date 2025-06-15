@@ -5,8 +5,7 @@
 
 :root {
   --header-height: 64px;
-  --footer-height: 56px;
-  --content-header: 112px;
+  --search-modal-height: 340px;
 }
 
 :root,

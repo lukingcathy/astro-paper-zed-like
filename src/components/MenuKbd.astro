@@ -1,0 +1,12 @@
+---
+export interface Props {
+  text: string;
+}
+
+const { text = "" } = Astro.props;
+---
+
+<kbd
+  class="dark:border-offgray-400/10 rounded-sm border border-gray-500/20 bg-gray-50/50 p-1 font-sans text-xs font-medium text-gray-500 dark:bg-gray-900 dark:text-orange-500"
+  >{text}
+</kbd>

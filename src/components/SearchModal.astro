@@ -1,0 +1,75 @@
+---
+import SearchBox from "@/components/SearchBox.astro";
+import Mark from "./Mark.astro";
+import MenuLinkList from "./MenuLinkList.astro";
+import MenuKbd from "./MenuKbd.astro";
+---
+
+<Mark id="search-model-mask" />
+<div
+  id="search-modal"
+  class="fixed inset-0 z-120 mx-auto my-12 hidden h-fit w-7/12 items-center justify-center gap-3 rounded-xl border border-gray-300 bg-background dark:border-gray-600/20"
+>
+  <div
+    class="relative mx-auto my-2 h-(--search-modal-height) w-full flex-1 overflow-y-auto"
+  >
+    <div class="mx-3">
+      <SearchBox />
+    </div>
+    <hr class="my-2 dark:border-gray-600/20" />
+    <ul class="flex list-none flex-col gap-1 p-2.5">
+      <MenuLinkList />
+      <li>
+        <div class="hidden justify-between gap-2 p-2 px-4 pt-0 text-sm md:flex">
+          <div class="flex flex-row gap-1">
+            <MenuKbd text="Tab" />
+            <span class="my-1">Move</span>
+          </div>
+          <div class="flex flex-row gap-1">
+            <MenuKbd text="Esc" />
+            <span class="my-1">Close</span>
+          </div>
+          <div class="flex flex-row gap-1">
+            <MenuKbd text="Enter" />
+            <span class="my-1">Select</span>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<script>
+  const modelEvent = () => {
+    const modal = document.querySelector("#search-modal");
+    const mark = document.querySelector("#search-model-mask");
+
+    if (!modal || !mark) {
+      return;
+    }
+
+    const clickEvent = () => {
+      modal.classList.toggle("hidden");
+      mark.classList.toggle("hidden");
+    };
+
+    mark.addEventListener("click", clickEvent);
+    document.addEventListener("keydown", event => {
+      if (event.defaultPrevented) {
+        return;
+      }
+      switch (event.key) {
+        case "Escape":
+          clickEvent();
+          break;
+        default:
+          return;
+      }
+      event.preventDefault();
+    });
+  };
+
+  modelEvent();
+
+  document.addEventListener("astro:after-swap", modelEvent);
+</script>

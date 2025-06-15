@@ -67,7 +67,7 @@ window.onload = () => {
     // set on load so screen readers can get the latest value on the button.
     reflectPreference();
 
-    const theme_click_event = () => {
+    const themeClickEvent = () => {
       themeValue = themeValue === "light" ? "dark" : "light";
       setPreference();
     };
@@ -75,10 +75,10 @@ window.onload = () => {
     // now this script can find and listen for clicks on the control.
     document
       .querySelector("#theme-btn")
-      ?.addEventListener("click", theme_click_event);
+      ?.addEventListener("click", themeClickEvent);
     document
       .querySelector("#menu-theme-btn")
-      ?.addEventListener("click", theme_click_event);
+      ?.addEventListener("click", themeClickEvent);
   }
 
   setThemeFeature();

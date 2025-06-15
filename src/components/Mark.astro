@@ -1,0 +1,13 @@
+---
+export interface Props {
+  id?: string;
+}
+
+const { id } = Astro.props;
+---
+
+<div
+  id={id}
+  class="pointer-events-auto fixed inset-0 z-110 hidden bg-black/40 dark:bg-black/40"
+>
+</div>
