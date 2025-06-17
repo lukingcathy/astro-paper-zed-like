@@ -9,12 +9,14 @@ export interface Props {
 const { centered = false } = Astro.props;
 ---
 
-<div class:list={["flex-wrap justify-center gap-1", { flex: centered }]}>
+<div
+  class:list={["flex-wrap justify-center gap-0.5 md:gap-1", { flex: centered }]}
+>
   {
     SOCIALS.map(social => (
       <LinkButton
         href={social.href}
-        class="mx-auto py-2 hover:rotate-6 sm:p-1"
+        class="mx-auto hover:rotate-6 md:p-1"
         title={social.linkTitle}
       >
         <social.icon class="inline-block size-4 scale-75 fill-transparent stroke-current stroke-2 opacity-90 group-hover:fill-transparent sm:size-6 sm:scale-110" />
