@@ -82,61 +82,97 @@ const nextPost =
 
 <Layout {...layoutProps}>
   <PageLayout>
-    <section
-      class="relative flex w-full flex-col justify-center-safe"
-      id="main-content"
+    <div
+      class="relative flex flex-col justify-center-safe"
+      id="post-main-content"
       slot="main-body-slot"
     >
-      <div
-        id="content-header"
-        class="sticky top-[var(--header-height)] z-40 my-4 bg-background pt-4"
-      >
-        <BackButton />
+      <div class="relative px-2 py-6 md:px-6 md:py-8">
         <div
-          class:list={[
-            "mx-auto px-4 pt-2 pb-8 md:mx-3 md:mr-auto",
-            { "mt-8": !SITE.showBackButton },
-          ]}
-          data-pagefind-title
+          class="absolute bottom-[-4.5px] left-[-4.5px] z-50 h-2 w-2 rotate-45 rounded-[1px] border border-blue-200 bg-white dark:border-blue-300/25"
         >
-          <h1
-            transition:name={slugifyStr(title)}
-            class="inline-block text-2xl font-bold text-accent sm:text-3xl"
+        </div>
+        <div
+          class="absolute right-[-4.5px] bottom-[-4.5px] z-50 h-2 w-2 rotate-45 rounded-[1px] border border-blue-200 bg-white dark:border-blue-300/25"
+        >
+        </div>
+        <div id="post-header" class="my-4 w-full bg-background">
+          <BackButton />
+          <div
+            class:list={[
+              "mx-auto px-4 pt-2 md:mx-3",
+              { "mt-8": !SITE.showBackButton },
+            ]}
+            data-pagefind-title
           >
-            {title}
-          </h1>
-          <div class="flex items-center gap-4">
-            <Datetime
-              {pubDatetime}
-              {modDatetime}
-              {timezone}
-              size="lg"
-              class="my-2"
-            />
-            <EditPost class="max-sm:hidden" {hideEditPost} {post} />
+            <h1
+              transition:name={slugifyStr(title)}
+              class="inline-block text-2xl font-bold text-accent sm:text-3xl"
+            >
+              {title}
+            </h1>
+            <div class="flex items-center gap-4">
+              <Datetime
+                {pubDatetime}
+                {modDatetime}
+                {timezone}
+                size="lg"
+                class="my-2"
+              />
+              <EditPost class="max-sm:hidden" {hideEditPost} {post} />
+            </div>
           </div>
         </div>
       </div>
+      <div class="-mx-3 flex items-center justify-center md:-mx-8 lg:-mx-12">
+        <hr class="w-full border-t" />
+      </div>
       <div
-        id="content-body-main"
+        id="post-body"
         class:list={[
-          "relative mx-auto w-full overflow-x-visible bg-background px-4 md:mx-3 md:mr-auto md:h-lvh md:overflow-auto",
+          "relative mt-4 bg-background px-6 md:mx-3 md:px-8",
           { "mt-8": !SITE.showBackButton },
         ]}
-        data-pagefind-article
       >
-        <article
-          id="article"
-          class="prose sm:prose-sm lg:prose-lg xl:prose-xl dark:prose-invert"
+        <div class="w-full overflow-x-auto md:h-lvh md:overflow-y-auto">
+          <article
+            id="article"
+            class="prose sm:prose-sm lg:prose-lg xl:prose-xl dark:prose-invert"
+          >
+            <Content />
+          </article>
+        </div>
+      </div>
+      <div class="relative px-2 py-6 sm:hidden md:px-6 md:py-8">
+        <div
+          class="absolute bottom-[-4.5px] left-[-4.5px] z-50 h-2 w-2 rotate-45 rounded-[1px] border border-blue-200 bg-white dark:border-blue-300/25"
         >
-          <Content />
-        </article>
+        </div>
+        <div
+          class="absolute right-[-4.5px] bottom-[-4.5px] z-50 h-2 w-2 rotate-45 rounded-[1px] border border-blue-200 bg-white dark:border-blue-300/25"
+        >
+        </div>
+      </div>
+      <div
+        class="-mx-3 flex items-center justify-center sm:hidden md:-mx-8 lg:-mx-12"
+      >
+        <hr class="w-full border-t" />
+      </div>
+      <div class="relative px-2 py-6 md:px-6 md:py-8">
+        <div
+          class="absolute bottom-[-4.5px] left-[-4.5px] z-50 h-2 w-2 rotate-45 rounded-[1px] border border-blue-200 bg-white dark:border-blue-300/25"
+        >
+        </div>
+        <div
+          class="absolute right-[-4.5px] bottom-[-4.5px] z-50 h-2 w-2 rotate-45 rounded-[1px] border border-blue-200 bg-white dark:border-blue-300/25"
+        >
+        </div>
         <div class="sm:hidden">
-          <hr class="my-8 border-dashed" />
           <EditPost {hideEditPost} {post} />
 
           <ul class="mt-4 mb-8 sm:my-8">
-            {tags.map(tag => <Tag tag={slugifyStr(tag)} tagName={tag} />)}
+            {tags.map(tag =>
+              <Tag tag={slugifyStr(tag)} tagName={tag} />)}
           </ul>
 
           <div class="flex flex-col items-center justify-between gap-6">
@@ -150,8 +186,12 @@ const nextPost =
               <span>Back to Top</span>
             </button>
           </div>
-          <hr class="my-6 border-dashed" />
         </div>
+      </div>
+      <div class="-mx-3 flex items-center justify-center md:-mx-8 lg:-mx-12">
+        <hr class="w-full border-t" />
+      </div>
+      <div class="relative px-2 py-6 pb-2 md:px-6 md:py-8">
         <!-- Previous/Next Post Buttons -->
         <div
           class="grid grid-cols-1 gap-6 py-6 text-lg sm:grid-cols-2"
@@ -187,7 +227,7 @@ const nextPost =
           }
         </div>
       </div>
-    </section>
+    </div>
     <aside
       id="content-body-right-sidebar"
       class="sticky top-[calc(var(--header-height)+40px)] z-50"
@@ -202,7 +242,8 @@ const nextPost =
       >
         <span class="italic">Tags:</span>
         <ul>
-          {tags.map(tag => <Tag tag={slugifyStr(tag)} tagName={tag} />)}
+          {tags.map(tag =>
+            <Tag tag={slugifyStr(tag)} tagName={tag} />)}
         </ul>
       </div>
       <hr class="my-6 w-2/3 border-dashed md:w-11/12" />
@@ -268,7 +309,7 @@ const nextPost =
    *  allowing sharing of sections easily */
   function addHeadingLinks() {
     const headings = Array.from(
-      document.querySelectorAll("h2, h3, h4, h5, h6")
+      document.querySelectorAll("h2, h3, h4, h5, h6"),
     );
     for (const heading of headings) {
       heading.classList.add("group");
@@ -358,6 +399,6 @@ const nextPost =
 
   /* Go to page start after page swap */
   document.addEventListener("astro:after-swap", () =>
-    window.scrollTo({ left: 0, top: 0, behavior: "instant" })
+    window.scrollTo({ left: 0, top: 0, behavior: "instant" }),
   );
 </script>
