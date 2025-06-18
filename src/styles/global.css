@@ -6,6 +6,8 @@
 :root {
   --header-height: 64px;
   --search-modal-height: 340px;
+  --post-sider-toc-height: 340px;
+  --post-sider-toc-width: 260px;
 }
 
 :root,

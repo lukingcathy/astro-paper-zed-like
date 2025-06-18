@@ -7,13 +7,16 @@ export interface Props {
 const { heading } = Astro.props;
 ---
 
-<li>
-  <a href={"#" + heading.slug}>
-    <span>{heading.text}</span>
+<li class="mx-auto my-auto list-none">
+  <a
+    class="inline text-nowrap text-ellipsis underline decoration-sky-200 underline-offset-2 hover:text-lg hover:text-wrap hover:italic hover:text-(--accent)"
+    href={"#" + heading.slug}
+  >
+    <span class="me-0.5 text-gray-900 dark:text-gray-300 hover:text-(--accent)">{heading.text}</span>
   </a>
   {
     heading.subheadings.length > 0 && (
-      <ul>
+      <ul class="my-0 ml-5 pl-0">
         {heading.subheadings.map(subheading => (
           <Astro.self heading={subheading} />
         ))}

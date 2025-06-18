@@ -12,6 +12,7 @@ import { getPath } from "@/utils/getPath";
 import { slugifyStr } from "@/utils/slugify";
 import IconChevronLeft from "@/assets/icons/IconChevronLeft.svg";
 import IconChevronRight from "@/assets/icons/IconChevronRight.svg";
+import IconTags from "@/assets/icons/IconTags.svg";
 import { SITE } from "@/config";
 
 export interface Props {
@@ -154,7 +155,10 @@ const nextPost =
             <div
               class="flex flex-col flex-wrap items-center justify-center gap-1 sm:items-start"
             >
-              <span class="italic">Tags:</span>
+              <label class="flex flex-row flex-auto gap-1 items-center-safe">
+                <IconTags />
+                <span class="italic">Tags</span>
+              </label>
               <ul>
                 {tags.map(tag =>
                   <Tag tag={slugifyStr(tag)} tagName={tag} />)}
