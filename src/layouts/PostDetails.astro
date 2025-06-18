@@ -134,13 +134,41 @@ const nextPost =
           { "mt-8": !SITE.showBackButton },
         ]}
       >
-        <div class="w-full overflow-x-auto md:h-lvh md:overflow-y-auto">
+        <div
+          class="relative flex w-full flex-auto flex-row gap-4 overflow-x-auto"
+        >
           <article
             id="article"
-            class="prose sm:prose-sm lg:prose-lg xl:prose-xl dark:prose-invert"
+            class="md:shark prose basis-auto sm:prose-sm md:h-lvh md:max-w-none md:grow md:basis-10/12 md:overflow-y-auto md:pr-3 lg:prose-lg xl:prose-xl dark:prose-invert"
           >
             <Content />
           </article>
+          <aside
+            id="post-sidebar"
+            class="hidden md:sticky md:top-[calc(10%+var(--header-height))] md:z-40 md:float-right md:ml-auto md:flex md:flex-none md:basis-2/12 md:flex-col md:gap-1"
+          >
+            <Toc headings={headings} />
+            <hr class="my-6 w-2/3 border-dashed md:w-11/12" />
+            <ShareLinks />
+            <hr class="my-6 w-2/3 border-dashed md:w-11/12" />
+            <div
+              class="flex flex-col flex-wrap items-center justify-center gap-1 sm:items-start"
+            >
+              <span class="italic">Tags:</span>
+              <ul>
+                {tags.map(tag =>
+                  <Tag tag={slugifyStr(tag)} tagName={tag} />)}
+              </ul>
+            </div>
+            <hr class="my-6 w-2/3 border-dashed md:w-11/12" />
+            <button
+              id="back-to-top-sidebar"
+              class="focus-outline py-1 whitespace-nowrap hover:opacity-75"
+            >
+              <IconChevronLeft class="inline-block rotate-90" />
+              <span>Back to Top</span>
+            </button>
+          </aside>
         </div>
       </div>
       <div class="relative px-2 py-6 sm:hidden md:px-6 md:py-8">
@@ -228,33 +256,6 @@ const nextPost =
         </div>
       </div>
     </div>
-    <aside
-      id="content-body-right-sidebar"
-      class="sticky top-[calc(var(--header-height)+40px)] z-50"
-      slot="main-sidebar-slot"
-    >
-      <Toc headings={headings} />
-      <hr class="my-6 w-2/3 border-dashed md:w-11/12" />
-      <ShareLinks />
-      <hr class="my-6 w-2/3 border-dashed md:w-11/12" />
-      <div
-        class="flex flex-col flex-wrap items-center justify-center gap-1 sm:items-start"
-      >
-        <span class="italic">Tags:</span>
-        <ul>
-          {tags.map(tag =>
-            <Tag tag={slugifyStr(tag)} tagName={tag} />)}
-        </ul>
-      </div>
-      <hr class="my-6 w-2/3 border-dashed md:w-11/12" />
-      <button
-        id="back-to-top-sidebar"
-        class="focus-outline py-1 whitespace-nowrap hover:opacity-75"
-      >
-        <IconChevronLeft class="inline-block rotate-90" />
-        <span>Back to Top</span>
-      </button>
-    </aside>
   </PageLayout>
 </Layout>
 
@@ -388,10 +389,16 @@ const nextPost =
     document
       .querySelector("#back-to-top-sidebar")
       ?.addEventListener("click", () => {
-        const element = document.querySelector("#content-body-main");
+        const element = document.getElementById("article");
         if (element) {
-          element.scrollTop = 0;
+          element.scrollTo({
+            top: 0,
+            left: 0,
+            behavior: "smooth",
+          });
         }
+        document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
       });
   }
 

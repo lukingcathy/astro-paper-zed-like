@@ -41,7 +41,7 @@ html[data-theme="dark"] {
   }
 
   html {
-    @apply overflow-auto overscroll-contain scroll-smooth;
+    @apply overflow-auto overscroll-auto scroll-smooth;
   }
 
   body {
