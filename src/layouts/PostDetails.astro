@@ -140,7 +140,7 @@ const nextPost =
         >
           <article
             id="article"
-            class="md:shark prose basis-auto sm:prose-sm md:h-lvh md:max-w-none md:grow md:basis-10/12 md:overflow-y-auto md:pr-3 lg:prose-lg xl:prose-xl dark:prose-invert"
+            class="md:shark prose basis-auto sm:prose-sm md:h-lvh w-fit md:max-w-none md:grow md:basis-10/12 md:overflow-y-auto md:pr-3 lg:prose-lg xl:prose-xl dark:prose-invert"
           >
             <Content />
           </article>
@@ -267,24 +267,33 @@ const nextPost =
   /** Create a progress indicator
    *  at the top */
   function createProgressBar() {
-    const mainRightSidebar = document.querySelector("#content-header");
-    if (mainRightSidebar) {
-      // Create the main container div
-      const progressContainer = document.createElement("div");
-      progressContainer.className =
-        "progress-container absolute bottom-0 z-10 h-1 w-full bg-background md:pl-8";
+    const article = document.querySelector("#article");
+    const navContainer = document.querySelector("#nav-container");
+    const mediaQuery = window.matchMedia("(max-width: 640px)");
 
-      // Create the progress bar div
-      const progressBar = document.createElement("div");
-      progressBar.className = "progress-bar h-1 w-0 bg-accent";
-      progressBar.id = "myBar";
-
-      // Append the progress bar to the progress container
-      progressContainer.appendChild(progressBar);
-
-      // Append the progress container to the document body or any other desired parent element
-      mainRightSidebar.appendChild(progressContainer);
+    if (!article || !navContainer) {
+      return;
     }
+
+    if (mediaQuery.matches) {
+      return;
+    }
+
+    // Create the main container div
+    const progressContainer = document.createElement("div");
+    progressContainer.className =
+      "progress-container absolute z-50 top-0 h-1 w-full bg-background px-auto";
+
+    // Create the progress bar div
+    const progressBar = document.createElement("div");
+    progressBar.className = "progress-bar h-1 w-0 bg-accent";
+    progressBar.id = "myBar";
+
+    // Append the progress bar to the progress container
+    progressContainer.appendChild(progressBar);
+
+    // Append the progress container to the document body or any other desired parent element
+    article.appendChild(progressContainer);
   }
 
   createProgressBar();
@@ -292,12 +301,20 @@ const nextPost =
   /** Update the progress bar
    *  when user scrolls */
   function updateScrollProgress() {
-    document.addEventListener("scroll", () => {
-      const winScroll =
-        document.body.scrollTop || document.documentElement.scrollTop;
-      const height =
-        document.documentElement.scrollHeight -
-        document.documentElement.clientHeight;
+    const article = document.querySelector("#article");
+    const mediaQuery = window.matchMedia("(max-width: 640px)");
+
+    if (!article) {
+      return;
+    }
+
+    if (mediaQuery.matches) {
+      return;
+    }
+
+    article.addEventListener("scroll", () => {
+      const winScroll = article.scrollTop;
+      const height = article.scrollHeight - article.clientHeight;
       const scrolled = (winScroll / height) * 100;
       if (document) {
         const myBar = document.getElementById("myBar");
