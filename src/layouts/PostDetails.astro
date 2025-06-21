@@ -443,6 +443,7 @@ const nextPost =
       link.addEventListener("click", (event) => {
         event.preventDefault();
         const offsetTop = target == null ? 0 : target.offsetTop;
+        window.scrollTo({ top: 0 });
         article.scrollTo({ top: offsetTop, behavior: "smooth" });
       });
     });
