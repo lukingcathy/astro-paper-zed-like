@@ -282,7 +282,7 @@ const nextPost =
     // Create the main container div
     const progressContainer = document.createElement("div");
     progressContainer.className =
-      "progress-container absolute z-50 top-0 h-1 w-full bg-background px-auto";
+      "progress-container fixed z-50 top-0 left-0 h-1 w-full bg-background";
 
     // Create the progress bar div
     const progressBar = document.createElement("div");
@@ -293,7 +293,7 @@ const nextPost =
     progressContainer.appendChild(progressBar);
 
     // Append the progress container to the document body or any other desired parent element
-    article.appendChild(progressContainer);
+    navContainer.appendChild(progressContainer);
   }
 
   createProgressBar();
