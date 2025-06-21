@@ -9,10 +9,10 @@ const { heading } = Astro.props;
 
 <li class="mx-auto my-2 list-none">
   <a
-    class="inline text-nowrap text-ellipsis underline decoration-sky-200 underline-offset-2 hover:text-wrap hover:text-(--accent)"
+    class="inline text-nowrap text-ellipsis underline decoration-(--accent) underline-offset-2 hover:text-wrap hover:italic hover:text-(--accent)"
     href={"#" + heading.slug}
   >
-    <span class="me-0.5 text-gray-900 dark:text-gray-300 hover:text-(--accent)">{heading.text}</span>
+    <span class="me-0.5">{heading.text}</span>
   </a>
   {
     heading.subheadings.length > 0 && (

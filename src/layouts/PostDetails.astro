@@ -410,13 +410,17 @@ const nextPost =
     document
       .querySelector("#back-to-top-sidebar")
       ?.addEventListener("click", () => {
-        const element = document.getElementById("article");
-        if (element) {
-          element.scrollTo({
+        const article = document.getElementById("article");
+        const tocNavUl = document.getElementById("toc-nav-ul");
+        if (article) {
+          article.scrollTo({
             top: 0,
             left: 0,
             behavior: "smooth",
           });
+        }
+        if (tocNavUl) {
+          tocNavUl.scrollTop = 0;
         }
         document.body.scrollTop = 0;
         document.documentElement.scrollTop = 0;
@@ -427,8 +431,9 @@ const nextPost =
 
   function smoothScrollAndPositionSync() {
     const article = document.getElementById("article");
+    const navUl = document.getElementById("toc-nav-ul");
 
-    if (!article) {
+    if (!article || !navUl) {
       return;
     }
 
@@ -439,6 +444,22 @@ const nextPost =
       };
     });
 
+    const targetsObserver = new IntersectionObserver(targets => {
+      targets.forEach(entry => {
+        const href = entry.target.getAttribute("id");
+        const link = document.querySelector(`#toc-nav-ul a[href="#${href}"]`);
+
+        if (!link) {
+          return;
+        }
+
+        const op = entry.intersectionRatio > 0 ? "add" : "remove";
+        link.classList[op]("text-wrap");
+        link.classList[op]("text-(--accent)");
+        link.scrollIntoView({ behavior: "smooth", block: "nearest" });
+      });
+    });
+
     tocLinks.forEach(({ link, target }) => {
       link.addEventListener("click", (event) => {
         event.preventDefault();
@@ -446,6 +467,7 @@ const nextPost =
         window.scrollTo({ top: 0 });
         article.scrollTo({ top: offsetTop, behavior: "smooth" });
       });
+      targetsObserver.observe(target);
     });
   }
 
