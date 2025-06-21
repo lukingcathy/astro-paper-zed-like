@@ -425,6 +425,31 @@ const nextPost =
 
   backToTopSidebar();
 
+  function smoothScrollAndPositionSync() {
+    const article = document.getElementById("article");
+
+    if (!article) {
+      return;
+    }
+
+    const tocLinks = [...document.querySelectorAll("#toc-nav-ul a")].map((a) => {
+      return {
+        link: a,
+        target: document.querySelector(a.getAttribute("href")),
+      };
+    });
+
+    tocLinks.forEach(({ link, target }) => {
+      link.addEventListener("click", (event) => {
+        event.preventDefault();
+        const offsetTop = target == null ? 0 : target.offsetTop;
+        article.scrollTo({ top: offsetTop, behavior: "smooth" });
+      });
+    });
+  }
+
+  smoothScrollAndPositionSync();
+
   /* Go to page start after page swap */
   document.addEventListener("astro:after-swap", () =>
     window.scrollTo({ left: 0, top: 0, behavior: "instant" }),
