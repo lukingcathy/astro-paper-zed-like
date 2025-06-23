@@ -13,6 +13,7 @@
     "lint": "eslint ."
   },
   "dependencies": {
+    "@astrojs/markdown-remark": "^6.3.2",
     "@astrojs/rss": "^4.0.12",
     "@astrojs/sitemap": "^3.4.1",
     "@resvg/resvg-js": "^2.6.2",
@@ -20,11 +21,13 @@
     "astro": "^5.10.0",
     "dayjs": "^1.11.13",
     "lodash.kebabcase": "^4.1.1",
+    "mermaid": "^11.7.0",
     "remark-collapse": "^0.1.2",
     "remark-toc": "^9.0.0",
     "satori": "^0.12.2",
     "sharp": "^0.33.5",
-    "tailwindcss": "^4.1.10"
+    "tailwindcss": "^4.1.10",
+    "unist-util-visit": "^5.0.0"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.4",

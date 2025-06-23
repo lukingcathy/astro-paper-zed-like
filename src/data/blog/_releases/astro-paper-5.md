@@ -79,6 +79,22 @@ AstroPaper v5 replaces inline SVGs with Astro’s experimental [SVG Component](h
 
 The project structure has been reorganized. The `src/config.ts` file now only contains the `SITE` object, which holds the main configuration for the project. All constants, such as `LOCALE`, `SOCIALS`, and `SHARE_LINKS`, have been moved to the `src/constants.ts` file.
 
+### Rendered the mermaid chart
+
+```mermaid
+sequenceDiagram
+    Alice ->> Bob: Hello Bob, how are you ?
+    Bob ->> Alice: Fine, thank you. And you?
+    create participant Carl
+    Alice ->> Carl: Hi Carl!
+    create actor D as Donald
+    Carl ->> D: Hi!
+    destroy Carl
+    Alice -x Carl: We are too many
+    destroy Bob
+    Bob ->> Alice: I agree!
+```
+
 ## Other notable changes
 
 - The blog posts directory has been updated from `src/content/blog/` to `src/data/blog/`.

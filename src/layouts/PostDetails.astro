@@ -140,7 +140,7 @@ const nextPost =
         >
           <article
             id="article"
-            class="md:shark prose basis-auto sm:prose-sm md:h-lvh w-fit md:max-w-none md:grow md:basis-9/12 md:overflow-y-auto md:pr-3 lg:prose-lg xl:prose-xl dark:prose-invert"
+            class="md:shark prose w-fit basis-auto sm:prose-sm md:h-lvh md:max-w-none md:grow md:basis-9/12 md:overflow-y-auto md:pr-3 lg:prose-lg xl:prose-xl dark:prose-invert"
           >
             <Content />
           </article>
@@ -155,7 +155,7 @@ const nextPost =
             <div
               class="flex flex-col flex-wrap items-center justify-center gap-1 sm:items-start"
             >
-              <label class="flex flex-row flex-auto gap-1 items-center-safe">
+              <label class="flex flex-auto flex-row items-center-safe gap-1">
                 <IconTags />
                 <span class="italic">Tags</span>
               </label>
@@ -357,6 +357,9 @@ const nextPost =
     const codeBlocks = Array.from(document.querySelectorAll("pre"));
 
     for (const codeBlock of codeBlocks) {
+      if (codeBlock.hasAttribute("data-mermaid-src")) {
+        continue;
+      }
       const wrapper = document.createElement("div");
       wrapper.style.position = "relative";
 
@@ -437,7 +440,7 @@ const nextPost =
       return;
     }
 
-    const tocLinks = [...document.querySelectorAll("#toc-nav-ul a")].map((a) => {
+    const tocLinks = [...document.querySelectorAll("#toc-nav-ul a")].map(a => {
       return {
         link: a,
         target: document.querySelector(a.getAttribute("href")),
@@ -461,7 +464,7 @@ const nextPost =
     });
 
     tocLinks.forEach(({ link, target }) => {
-      link.addEventListener("click", (event) => {
+      link.addEventListener("click", event => {
         event.preventDefault();
         const offsetTop = target == null ? 0 : target.offsetTop;
         window.scrollTo({ top: 0 });
@@ -475,6 +478,49 @@ const nextPost =
 
   /* Go to page start after page swap */
   document.addEventListener("astro:after-swap", () =>
-    window.scrollTo({ left: 0, top: 0, behavior: "instant" }),
+    window.scrollTo({ left: 0, top: 0, behavior: "instant" })
   );
+</script>
+
+<script>
+// Source: https://github.com/JuanM04/portfolio/blob/983b0ed0eabdac37bf8b7912d3e8128a443192b9/src/pages/docs/%5B...documentSlug%5D.astro#L74-L103
+// From this comment: https://github.com/withastro/astro/issues/4433#issuecomment-1584019991
+/**
+* @params {HTMLCollectionOf<HTMLElement>} graphs
+*/
+async function renderDiagrams(graphs) {
+  if (!graphs || graphs.length === 0) {
+  return,;
+  }
+  const { default: mermaid } = await import("mermaid");
+  mermaid.initialize({
+    themeCSS: "width: 100%; height: auto;",
+    startOnLoad: false,
+    fontFamily: "var(--sans-font)",
+    // @ts-ignore This works, but TS expects a enum for some reason
+      theme: window.matchMedia("(prefers-color-scheme: dark)").matches
+    ? "dark"
+    : "default",
+    });
+
+  for (const graph of graphs) {
+  const content = graph.querySelector(".src").innerText;
+  if (!content) {
+  continue,;
+  }
+  const id = "mermaid-" + Math.round(Math.random() * 100000);
+  mermaid
+    .render(id, content)
+    .then(result => {
+    graph.innerHTML = result.svg;
+    graph.setAttribute("data-status", "rendered");
+    })
+    .catch(error => {
+    graph.innerHTML = error;
+    graph.setAttribute("data-status", "error");
+    });
+  }
+  }
+
+renderDiagrams(document.getElementsByClassName("mermaid"));
 </script>
