@@ -500,7 +500,7 @@ async function renderDiagrams(graphs) {
     // @ts-ignore This works, but TS expects a enum for some reason
       theme: window.matchMedia("(prefers-color-scheme: dark)").matches
     ? "dark"
-    : "default",
+    : "base",
     });
 
   for (const graph of graphs) {
