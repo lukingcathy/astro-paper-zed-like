@@ -1,4 +1,4 @@
-type Theme = "light" | "dark";
+export type Theme = "light" | "dark";
 
 const primaryColorScheme: Theme = "light";
 
@@ -11,7 +11,7 @@ const currentTheme = ((): Theme | null => {
   return null;
 })();
 
-const getPreferTheme = (): Theme => {
+export const getPreferTheme = (): Theme => {
   // return theme value in local storage if it is set
   if (currentTheme) {
     return currentTheme as Theme;
