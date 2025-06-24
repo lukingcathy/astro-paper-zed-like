@@ -1,36 +1,34 @@
-const primaryColorScheme = ""; // "light" | "dark"
+type Theme = "light" | "dark";
+
+const primaryColorScheme: Theme = "light";
 
 // Get theme data from local storage
-const currentTheme = localStorage.getItem("theme");
+const currentTheme = ((): Theme | null => {
+  const localTheme = localStorage.getItem("theme");
+  if (localTheme && (localTheme === "light" || localTheme === "dark")) {
+    return localTheme as Theme;
+  }
+  return null;
+})();
 
-function getPreferTheme() {
+const getPreferTheme = (): Theme => {
   // return theme value in local storage if it is set
   if (currentTheme) {
-    return currentTheme;
+    return currentTheme as Theme;
   }
-
   // return primary color scheme if it is set
   if (primaryColorScheme) {
     return primaryColorScheme;
   }
-
   // return user device's prefer color scheme
   return window.matchMedia("(prefers-color-scheme: dark)").matches
     ? "dark"
-    : "light";
-}
+    : ("light" as Theme);
+};
 
-let themeValue = getPreferTheme();
-
-function setPreference() {
-  localStorage.setItem("theme", themeValue);
-  reflectPreference();
-}
-
-function reflectPreference() {
-  document.firstElementChild.setAttribute("data-theme", themeValue);
+const reflectPreference = (): void => {
+  document.firstElementChild?.setAttribute("data-theme", themeValue);
   document.querySelector("#theme-btn")?.setAttribute("aria-label", themeValue);
-
   const menuThemeBtn = document.querySelector("#menu-theme-btn");
   if (menuThemeBtn) {
     const isLight = themeValue === "light";
@@ -40,38 +38,39 @@ function reflectPreference() {
       ? "Turn Dark Mode On"
       : "Turn Light Mode On";
   }
-
   // Get a reference to the body element
   const body = document.body;
-
   // Check if the body element exists before using getComputedStyle
   if (body) {
     // Get the computed styles for the body element
     const computedStyles = window.getComputedStyle(body);
-
     // Get the background color property
     const bgColor = computedStyles.backgroundColor;
-
     // Set the background color in <meta theme-color ... />
     document
       .querySelector("meta[name='theme-color']")
       ?.setAttribute("content", bgColor);
   }
-}
+};
+
+let themeValue = getPreferTheme();
+
+const setPreference = (): void => {
+  localStorage.setItem("theme", themeValue);
+  reflectPreference();
+};
 
 // set early so no page flashes / CSS is made aware
 reflectPreference();
 
 window.onload = () => {
-  function setThemeFeature() {
+  const setThemeFeature = () => {
     // set on load so screen readers can get the latest value on the button.
     reflectPreference();
-
     const themeClickEvent = () => {
       themeValue = themeValue === "light" ? "dark" : "light";
       setPreference();
     };
-
     // now this script can find and listen for clicks on the control.
     document
       .querySelector("#theme-btn")
@@ -79,10 +78,9 @@ window.onload = () => {
     document
       .querySelector("#menu-theme-btn")
       ?.addEventListener("click", themeClickEvent);
-  }
+  };
 
   setThemeFeature();
-
   // Runs on view transitions navigation
   document.addEventListener("astro:after-swap", setThemeFeature);
 };

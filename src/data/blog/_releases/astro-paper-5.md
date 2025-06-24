@@ -92,7 +92,7 @@ sequenceDiagram
     destroy Carl
     Alice -x Carl: We are too many
     destroy Bob
-    Bob ->> Alice: I agree!
+    Bob ->> Alice: I agree!!!
 ```
 
 ## Other notable changes
