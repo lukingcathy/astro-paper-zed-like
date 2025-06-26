@@ -11,6 +11,9 @@ const renderDiagrams = async (
     return;
   }
   const { default: mermaid } = await import("mermaid");
+  const { SvgToolbelt } = await import("svg-toolbelt");
+  await import("svg-toolbelt/dist/svg-toolbelt.css");
+
   const mermaidTheme = theme === "dark" ? "dark" : "base";
   mermaid.initialize({
     themeCSS: "width: 100%; height: auto;",
@@ -40,11 +43,20 @@ const renderDiagrams = async (
         if (svg) {
           mermaidPrompt.classList["add"]("hidden");
           mermaidPre.classList["add"]("hidden");
-          const oldSvg = graph.querySelectorAll("svg");
+          const oldSvg = graph.querySelectorAll(
+            "svg, .svg-toolbelt-controls, .svg-toolbelt-zoom-indicator"
+          );
           oldSvg.forEach(e => {
             e.remove();
           });
           graph.appendChild(svg);
+          const svgToolbelt = new SvgToolbelt(graph as HTMLElement, {
+            minScale: 0.2,
+            maxScale: 8,
+            controlsPosition: "top-right",
+            enableKeyboard: true,
+          });
+          svgToolbelt.init();
         }
         graph.setAttribute("data-status", "rendered");
       })

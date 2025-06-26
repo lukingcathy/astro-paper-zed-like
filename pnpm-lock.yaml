@@ -47,6 +47,9 @@ importers:
       sharp:
         specifier: ^0.33.5
         version: 0.33.5
+      svg-toolbelt:
+        specifier: ^0.7.0
+        version: 0.7.0
       tailwindcss:
         specifier: ^4.1.10
         version: 4.1.10
@@ -2805,6 +2808,10 @@ packages:
   supports-color@7.2.0:
     resolution: {integrity: sha512-qpCAvRl9stuOHveKsn7HncJRvv501qIacKzQlO/+Lwxc9+0q2wLyv4Dfvt80/DPn2pqOBsJdDiogXGR9+OvwRw==}
     engines: {node: '>=8'}
+
+  svg-toolbelt@0.7.0:
+    resolution: {integrity: sha512-EK5IYUc7Tk4H4d5QcJ7C6t9Qu1YAqpKECYABxUf2GAyGyNWKdy/+T5AJ0oKBmsbv3snCi/Zaev6tLQOqoxRJHw==}
+    engines: {node: '>=18'}
 
   synckit@0.11.8:
     resolution: {integrity: sha512-+XZ+r1XGIJGeQk3VvXhT6xx/VpbHsRzsTkGgF6E5RX9TTXD0118l87puaEBZ566FhqblC6U0d4XnubznJDm30A==}
@@ -6303,6 +6310,8 @@ snapshots:
   supports-color@7.2.0:
     dependencies:
       has-flag: 4.0.0
+
+  svg-toolbelt@0.7.0: {}
 
   synckit@0.11.8:
     dependencies:
