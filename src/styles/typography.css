@@ -70,10 +70,6 @@
       @apply rounded bg-muted/75 p-1 break-words text-foreground before:content-none after:content-none;
     }
 
-    .astro-code code {
-      @apply bg-inherit;
-    }
-
     blockquote {
       @apply border-s-accent/80 break-words opacity-80;
     }
@@ -94,6 +90,10 @@
   /* ===== Code Blocks & Syntax Highlighting ===== */
   .astro-code {
     @apply border bg-(--shiki-light-bg) text-(--shiki-light) outline-border [&_span]:text-(--shiki-light);
+  }
+
+  .astro-code code {
+    @apply bg-inherit p-0;
   }
 
   html[data-theme="dark"] .astro-code {
