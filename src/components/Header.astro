@@ -113,8 +113,8 @@ const isActive = (path: string): boolean => {
             notSearchPage && (
               <li class="col-span-1 flex items-center justify-center">
                 <button
-                  id="search-btn"
                   class="focus-outline flex p-3 sm:p-1 hover:[&>svg]:stroke-accent"
+                  data-search-btn
                 >
                   <IconSearch />
                 </button>
@@ -229,22 +229,19 @@ const isActive = (path: string): boolean => {
   toggleNav();
 
   function openSearchModel() {
-    const searchBtn = document.querySelector("#search-btn");
+    const searchBtnList = document.querySelectorAll("*[data-search-btn]");
+    const model = document.querySelector("#search-modal");
+    const mark = document.querySelector("#search-model-mask");
 
-    if (!searchBtn) {
+    if (!searchBtnList || !model || !mark) {
       return;
     }
 
-    searchBtn.addEventListener("click", () => {
-      const model = document.querySelector("#search-modal");
-      const mark = document.querySelector("#search-model-mask");
-
-      if (!model || !mark) {
-        return;
-      }
-
-      model.classList.toggle("hidden");
-      mark.classList.toggle("hidden");
+    searchBtnList.forEach(btn => {
+      btn.addEventListener("click", () => {
+        model.classList.toggle("hidden");
+        mark.classList.toggle("hidden");
+      });
     });
   }
 
