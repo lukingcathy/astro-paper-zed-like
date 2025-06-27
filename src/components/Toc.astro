@@ -12,7 +12,7 @@ export interface Props {
 }
 
 function buildHeadingHierarchy(
-  headings: MarkdownHeading[],
+  headings: MarkdownHeading[]
 ): HeadingHierarchy[] {
   const headingHierarchies: HeadingHierarchy[] = [];
   const headingMap: Map<number, HeadingHierarchy> = new Map();
@@ -60,8 +60,7 @@ const hasToc = toc.length > 0;
               class="order-last ml-auto inline-block"
             />
           </summary>
-          <div
-            class="mt-2 mb-0 flex h-fit max-h-(--post-sider-toc-height) w-fit max-w-(--post-sider-toc-width) flex-auto flex-row gap-1">
+          <div class="mt-2 mb-0 flex h-fit max-h-(--post-sider-toc-height) w-fit max-w-(--post-sider-toc-width) flex-auto flex-row gap-1">
             <div class="border-r-1 pr-5" />
             <ul
               id="toc-nav-ul"
@@ -78,7 +77,7 @@ const hasToc = toc.length > 0;
   }
 </>
 
-<script>
+<script is:inline data-astro-rerun>
   function detailsChevron() {
     const details = document.getElementById("toc-nav-details");
     const summary = document.getElementById("toc-nav-details-summary");
