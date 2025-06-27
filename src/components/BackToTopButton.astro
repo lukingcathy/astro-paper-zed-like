@@ -33,8 +33,9 @@ import IconArrowNarrowUp from "@/assets/icons/IconArrowNarrowUp.svg";
 </div>
 
 <script is:inline data-astro-rerun>
-  /** Scrolls the document to the top when
-   * the "Back to Top" button is clicked. */
+  /**
+   * Scrolls the document to the top when the "Back to Top" button is clicked.
+   * */
   function backToTop() {
     const rootElement = document.documentElement;
     const btnContainer = document.querySelector("#btt-btn-container");
@@ -46,8 +47,10 @@ import IconArrowNarrowUp from "@/assets/icons/IconArrowNarrowUp.svg";
 
     // Attach click event handler for back-to-top button
     backToTopBtn.addEventListener("click", () => {
-      document.body.scrollTop = 0; // For Safari
-      document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+      // For Safari
+      document.body.scrollTop = 0;
+      // For Chrome, Firefox, IE and Opera
+      document.documentElement.scrollTop = 0;
     });
 
     // Handle button visibility according to scroll position

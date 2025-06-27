@@ -8,8 +8,10 @@ import Datetime from "@/components/Datetime.astro";
 import EditPost from "@/components/EditPost.astro";
 import ShareLinks from "@/components/ShareLinks.astro";
 import BackButton from "@/components/BackButton.astro";
+import BackToTopButton from "@/components/BackToTopButton.astro";
 import { getPath } from "@/utils/getPath";
 import { slugifyStr } from "@/utils/slugify";
+import IconArrowNarrowUp from "@/assets/icons/IconArrowNarrowUp.svg";
 import IconChevronLeft from "@/assets/icons/IconChevronLeft.svg";
 import IconChevronRight from "@/assets/icons/IconChevronRight.svg";
 import IconTags from "@/assets/icons/IconTags.svg";
@@ -161,8 +163,7 @@ const nextPost =
                 <span class="italic">Tags</span>
               </label>
               <ul>
-                {tags.map(tag =>
-                  <Tag tag={slugifyStr(tag)} tagName={tag} />)}
+                {tags.map(tag => <Tag tag={slugifyStr(tag)} tagName={tag} />)}
               </ul>
             </div>
             <hr class="my-6 w-2/3 border-dashed md:w-11/12" />
@@ -170,7 +171,7 @@ const nextPost =
               id="back-to-top-sidebar"
               class="focus-outline py-1 whitespace-nowrap hover:opacity-75"
             >
-              <IconChevronLeft class="inline-block rotate-90" />
+              <IconArrowNarrowUp class="inline-block" />
               <span>Back to Top</span>
             </button>
           </aside>
@@ -203,22 +204,13 @@ const nextPost =
         <div class="sm:hidden">
           <EditPost {hideEditPost} {post} />
 
+          <BackToTopButton />
+
           <ul class="mt-4 mb-8 sm:my-8">
-            {tags.map(tag =>
-              <Tag tag={slugifyStr(tag)} tagName={tag} />)}
+            {tags.map(tag => <Tag tag={slugifyStr(tag)} tagName={tag} />)}
           </ul>
 
-          <div class="flex flex-col items-center justify-between gap-6">
-            <ShareLinks />
-
-            <button
-              id="back-to-top"
-              class="focus-outline py-1 whitespace-nowrap hover:opacity-75"
-            >
-              <IconChevronLeft class="inline-block rotate-90" />
-              <span>Back to Top</span>
-            </button>
-          </div>
+          <ShareLinks />
         </div>
       </div>
       <div class="-mx-3 flex items-center justify-center md:-mx-8 lg:-mx-12">
@@ -332,7 +324,7 @@ const nextPost =
    *  allowing sharing of sections easily */
   function addHeadingLinks() {
     const headings = Array.from(
-      document.querySelectorAll("h2, h3, h4, h5, h6"),
+      document.querySelectorAll("h2, h3, h4, h5, h6")
     );
     for (const heading of headings) {
       heading.classList.add("group");
@@ -351,8 +343,9 @@ const nextPost =
 
   addHeadingLinks();
 
-  /** Attaches copy buttons to code blocks in the document,
-   * allowing users to copy code easily. */
+  /**
+   * Attaches copy buttons to code blocks in the document, allowing users to copy code easily.
+   */
   function attachCopyButtons() {
     const copyButtonLabel = "Copy";
     const codeBlocks = Array.from(document.querySelectorAll("pre"));
@@ -396,17 +389,6 @@ const nextPost =
   }
 
   attachCopyButtons();
-
-  /** Scrolls the document to the top when
-   * the "Back to Top" button is clicked. */
-  function backToTop() {
-    document.querySelector("#back-to-top")?.addEventListener("click", () => {
-      document.body.scrollTop = 0; // For Safari
-      document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
-    });
-  }
-
-  backToTop();
 
   /** Scrolls the document to the top when
    * the "Back to Top" button is clicked. */
