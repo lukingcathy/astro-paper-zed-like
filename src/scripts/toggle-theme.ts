@@ -91,9 +91,11 @@ document.addEventListener("astro:before-swap", event => {
     .querySelector("meta[name='theme-color']")
     ?.getAttribute("content");
 
-  event.newDocument
-    .querySelector("meta[name='theme-color']")
-    ?.setAttribute("content", bgColor);
+  if (bgColor) {
+    event.newDocument
+      .querySelector("meta[name='theme-color']")
+      ?.setAttribute("content", bgColor);
+  }
 });
 
 // sync with system changes
