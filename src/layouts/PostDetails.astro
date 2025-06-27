@@ -3,7 +3,7 @@ import { render, type CollectionEntry } from "astro:content";
 import Layout from "@/layouts/Layout.astro";
 import PageLayout from "@/layouts/PageLayout.astro";
 import Tag from "@/components/Tag.astro";
-import Toc from "@/components/Toc.astro";
+import SidebarToc from "@/components/SidebarToc.astro";
 import Datetime from "@/components/Datetime.astro";
 import EditPost from "@/components/EditPost.astro";
 import ShareLinks from "@/components/ShareLinks.astro";
@@ -154,7 +154,7 @@ const nextPost =
             id="post-sidebar"
             class="hidden md:sticky md:top-[calc(10%+var(--header-height))] md:z-40 md:float-right md:ml-6 md:flex md:flex-none md:basis-3/12 md:flex-col md:gap-1"
           >
-            <Toc headings={headings} />
+            <SidebarToc headings={headings} />
             <hr class="my-6 w-2/3 border-dashed md:w-11/12" />
             <ShareLinks />
             <hr class="my-6 w-2/3 border-dashed md:w-11/12" />
@@ -200,7 +200,7 @@ const nextPost =
                 <button
                   class="focus-outline py-1 whitespace-nowrap hover:opacity-75"
                 >
-                  <EditPost {hideEditPost} {post} hideText="true" />
+                  <EditPost {hideEditPost} {post} hideText={true} />
                 </button>
               </div>
             </div>
@@ -233,13 +233,10 @@ const nextPost =
         </div>
         <div class="sm:hidden">
           <EditPost {hideEditPost} {post} />
-
           <BackToTopButton />
-
           <ul class="mt-4 mb-8 sm:my-8">
             {tags.map(tag => <Tag tag={slugifyStr(tag)} tagName={tag} />)}
           </ul>
-
           <ShareLinks />
         </div>
       </div>
@@ -397,7 +394,7 @@ const nextPost =
       codeBlock.setAttribute("tabindex", "0");
       codeBlock.appendChild(copyButton);
 
-      // wrap codebock with relative parent element
+      // wrap code bock with relative parent element
       codeBlock?.parentNode?.insertBefore(wrapper, codeBlock);
       wrapper.appendChild(codeBlock);
 
@@ -451,23 +448,26 @@ const nextPost =
 
   function smoothScrollAndPositionSync() {
     const article = document.getElementById("article");
-    const navUl = document.getElementById("toc-nav-ul");
 
-    if (!article || !navUl) {
+    if (!article) {
       return;
     }
 
-    const tocLinks = [...document.querySelectorAll("#toc-nav-ul a")].map(a => {
-      return {
-        link: a,
-        target: document.querySelector(a.getAttribute("href")),
-      };
-    });
+    const tocLinks = [...document.querySelectorAll("*[data-toc-ul] a")].map(
+      a => {
+        return {
+          link: a,
+          target: document.querySelector(a.getAttribute("href")),
+        };
+      }
+    );
 
     const targetsObserver = new IntersectionObserver(targets => {
       targets.forEach(entry => {
         const href = entry.target.getAttribute("id");
-        const link = document.querySelector(`#toc-nav-ul a[href="#${href}"]`);
+        const link = document.querySelector(
+          `*[data-toc-ul] a[href="#${href}"]`
+        );
 
         if (!link) {
           return;

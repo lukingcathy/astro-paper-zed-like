@@ -1,0 +1,65 @@
+---
+import type { MarkdownHeading } from "astro";
+import IconList from "@/assets/icons/IconList.svg";
+import IconChevronRight from "@/assets/icons/IconChevronRight.svg";
+import Toc from "./Toc.astro";
+
+export interface Props {
+  headings: MarkdownHeading[];
+}
+
+const { headings } = Astro.props;
+const hasHeadings = headings.length > 0;
+---
+
+<>
+  {
+    hasHeadings && (
+      <nav class="flex flex-col flex-wrap items-stretch justify-center gap-1">
+        <details id="toc-nav-details" open>
+          <summary
+            id="toc-nav-details-summary"
+            class="flex flex-auto flex-row items-center-safe gap-1"
+          >
+            <IconList />
+            <span class="italic">On This Page</span>
+            <IconChevronRight
+              id="toc-nav-details-summary-chevron"
+              class="order-last ml-auto inline-block"
+            />
+          </summary>
+          <div class="mt-2 mb-0 flex h-fit max-h-(--post-sider-toc-height) w-fit max-w-(--post-sider-toc-width) flex-auto flex-row gap-1">
+            <div class="border-r-1 pr-5" />
+            <Toc headings={headings} />
+          </div>
+        </details>
+      </nav>
+    )
+  }
+</>
+
+<script is:inline data-astro-rerun>
+  function detailsChevron() {
+    const details = document.getElementById("toc-nav-details");
+    const summary = document.getElementById("toc-nav-details-summary");
+    const chevron = document.getElementById("toc-nav-details-summary-chevron");
+
+    if (!details || !summary || !chevron) {
+      return;
+    }
+
+    summary.addEventListener("click", event => {
+      event.preventDefault();
+    });
+    chevron.addEventListener("click", () => {
+      details.open = !details.open;
+      chevron.classList.toggle("rotate-90");
+    });
+  }
+
+  detailsChevron();
+
+  document.addEventListener("astro:after-swap", () => {
+    detailsChevron();
+  });
+</script>
