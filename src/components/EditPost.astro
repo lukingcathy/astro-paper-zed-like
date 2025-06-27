@@ -7,9 +7,15 @@ export interface Props {
   hideEditPost?: CollectionEntry<"blog">["data"]["hideEditPost"];
   class?: string;
   post: CollectionEntry<"blog">;
+  hideText?: boolean;
 }
 
-const { hideEditPost, post, class: className = "" } = Astro.props;
+const {
+  hideEditPost,
+  post,
+  class: className = "",
+  hideText = false,
+} = Astro.props;
 
 const href = `${SITE.editPost.url}${post.filePath}`;
 const showEditPost =
@@ -19,9 +25,11 @@ const showEditPost =
 {
   showEditPost && (
     <div class:list={["opacity-80", className]}>
-      <span aria-hidden="true" class="max-sm:hidden">
-        |
-      </span>
+      {!hideText && (
+        <span aria-hidden="true" class="max-sm:hidden">
+          |
+        </span>
+      )}
       <a
         class="space-x-1.5 hover:opacity-75"
         href={href}
@@ -29,9 +37,11 @@ const showEditPost =
         target="_blank"
       >
         <IconEdit class="inline-block size-6" />
-        <span class="italic max-sm:text-sm sm:inline">
-          {SITE.editPost.text}
-        </span>
+        {!hideText && (
+          <span class="italic max-sm:text-sm sm:inline">
+            {SITE.editPost.text}
+          </span>
+        )}
       </a>
     </div>
   )

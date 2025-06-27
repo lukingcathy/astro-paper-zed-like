@@ -11,9 +11,11 @@ import BackButton from "@/components/BackButton.astro";
 import BackToTopButton from "@/components/BackToTopButton.astro";
 import { getPath } from "@/utils/getPath";
 import { slugifyStr } from "@/utils/slugify";
-import IconArrowNarrowUp from "@/assets/icons/IconArrowNarrowUp.svg";
+import IconArrowBigUpLines from "@/assets/icons/IconArrowBigUpLines.svg";
+import IconAlignLeft2 from "@/assets/icons/IconAlignLeft2.svg";
 import IconChevronLeft from "@/assets/icons/IconChevronLeft.svg";
 import IconChevronRight from "@/assets/icons/IconChevronRight.svg";
+import IconHome from "@/assets/icons/IconHome.svg";
 import IconTags from "@/assets/icons/IconTags.svg";
 import { SITE } from "@/config";
 
@@ -167,13 +169,34 @@ const nextPost =
               </ul>
             </div>
             <hr class="my-6 w-2/3 border-dashed md:w-11/12" />
-            <button
-              id="back-to-top-sidebar"
-              class="focus-outline py-1 whitespace-nowrap hover:opacity-75"
+            <div
+              class="flex flex-col flex-wrap items-center justify-center gap-1 sm:items-start"
             >
-              <IconArrowNarrowUp class="inline-block" />
-              <span>Back to Top</span>
-            </button>
+              <label class="flex flex-auto flex-row items-center-safe gap-1">
+                <IconAlignLeft2 />
+                <span class="italic">Shortcuts</span>
+              </label>
+              <div class="flex flex-row items-start gap-4">
+                <button
+                  id="back-to-top-sidebar"
+                  class="focus-outline py-1 whitespace-nowrap hover:opacity-75"
+                >
+                  <IconArrowBigUpLines />
+                </button>
+                <button
+                  class="focus-outline py-1 whitespace-nowrap hover:opacity-75"
+                >
+                  <a href="/">
+                    <IconHome />
+                  </a>
+                </button>
+                <button
+                  class="focus-outline py-1 whitespace-nowrap hover:opacity-75"
+                >
+                  <EditPost {hideEditPost} {post} hideText="true" />
+                </button>
+              </div>
+            </div>
           </aside>
         </div>
       </div>
