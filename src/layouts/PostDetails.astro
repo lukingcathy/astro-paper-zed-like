@@ -257,8 +257,9 @@ const nextPost =
 </Layout>
 
 <script is:inline data-astro-rerun>
-  /** Create a progress indicator
-   *  at the top */
+  /**
+   * Create a progress indicator at the top
+   */
   function createProgressBar() {
     const article = document.querySelector("#article");
     const navContainer = document.querySelector("#nav-container");
@@ -291,8 +292,9 @@ const nextPost =
 
   createProgressBar();
 
-  /** Update the progress bar
-   *  when user scrolls */
+  /**
+   * Update the progress bar when user scrolls
+   */
   function updateScrollProgress() {
     const article = document.querySelector("#article");
     const mediaQuery = window.matchMedia("(max-width: 640px)");
@@ -320,8 +322,9 @@ const nextPost =
 
   updateScrollProgress();
 
-  /** Attaches links to headings in the document,
-   *  allowing sharing of sections easily */
+  /**
+   * Attaches links to headings in the document, allowing sharing of sections easily
+   */
   function addHeadingLinks() {
     const headings = Array.from(
       document.querySelectorAll("h2, h3, h4, h5, h6")
@@ -390,8 +393,9 @@ const nextPost =
 
   attachCopyButtons();
 
-  /** Scrolls the document to the top when
-   * the "Back to Top" button is clicked. */
+  /**
+   * Scrolls the document to the top when the "Back to Top" button is clicked.
+   */
   function backToTopSidebar() {
     document
       .querySelector("#back-to-top-sidebar")
@@ -459,7 +463,9 @@ const nextPost =
 
   smoothScrollAndPositionSync();
 
-  /* Go to page start after page swap */
+  /**
+   * Go to page start after page swap
+   */
   document.addEventListener("astro:after-swap", () =>
     window.scrollTo({ left: 0, top: 0, behavior: "instant" })
   );
