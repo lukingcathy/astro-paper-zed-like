@@ -59,11 +59,9 @@ const hasHeadings = headings.length > 0;
         id="btt-toc-container"
         class="fixed right-14 bottom-8 ml-3 hidden h-fit w-[300px] max-w-[300px] overflow-x-auto rounded-md border-1 bg-background text-wrap shadow-xl"
       >
-        <span class="my-4 w-full border-dashed pl-1.5 text-xl">
-          On the page
-        </span>
+        <span class="my-4 w-full border-dashed pl-1.5 text-xl">On the pag</span>
         <div class="pl-2">
-          <Toc headings={headings} />
+          <Toc headings={headings} needSmoothScroll={false} />
         </div>
       </div>
     )
@@ -132,6 +130,11 @@ const hasHeadings = headings.length > 0;
         });
         ticking = true;
       }
+    });
+    document.querySelectorAll("*[data-toc-ul='jump'] a").forEach(a => {
+      a.addEventListener("click", () => {
+        tocContainer.classList.add("hidden");
+      });
     });
   }
 

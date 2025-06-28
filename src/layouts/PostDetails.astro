@@ -448,20 +448,17 @@ const nextPost =
 
   function smoothScrollAndPositionSync() {
     const article = document.getElementById("article");
-
     if (!article) {
       return;
     }
-
-    const tocLinks = [...document.querySelectorAll("*[data-toc-ul] a")].map(
-      a => {
-        return {
-          link: a,
-          target: document.querySelector(a.getAttribute("href")),
-        };
-      }
-    );
-
+    const tocLinks = [
+      ...document.querySelectorAll("*[data-toc-ul='scroll'] a"),
+    ].map(a => {
+      return {
+        link: a,
+        target: document.querySelector(a.getAttribute("href")),
+      };
+    });
     const observer = new IntersectionObserver(sections => {
       sections.forEach(section => {
         const heading = section.target.querySelector("h1, h2, h3, h4, h5, h6");
@@ -476,14 +473,12 @@ const nextPost =
         if (!link) {
           return;
         }
-
         const op = section.intersectionRatio > 0 ? "add" : "remove";
         link.classList[op]("text-wrap");
         link.classList[op]("text-(--accent)");
         link.scrollIntoView({ behavior: "smooth", block: "nearest" });
       });
     });
-
     tocLinks.forEach(({ link, target }) => {
       link.addEventListener("click", event => {
         event.preventDefault();

@@ -7,6 +7,7 @@ export interface HeadingHierarchy extends MarkdownHeading {
 
 export interface Props {
   headings: MarkdownHeading[];
+  needSmoothScroll?: boolean;
 }
 
 function buildHeadingHierarchy(
@@ -35,7 +36,7 @@ function buildHeadingHierarchy(
   return headingHierarchies;
 }
 
-const { headings } = Astro.props;
+const { headings, needSmoothScroll = true } = Astro.props;
 
 const toc = buildHeadingHierarchy(headings);
 
@@ -48,7 +49,7 @@ const hasToc = toc.length > 0;
       <ul
         id="toc-nav-ul"
         class="list-none overflow-x-hidden overflow-y-auto pr-2 pl-1 text-base"
-        data-toc-ul
+        data-toc-ul={needSmoothScroll ? "scroll" : "jump"}
       >
         {toc.map(heading => (
           <TocHeading heading={heading} />
