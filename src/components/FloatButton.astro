@@ -131,9 +131,19 @@ const hasHeadings = headings.length > 0;
         ticking = true;
       }
     });
-    document.querySelectorAll("*[data-toc-ul='jump'] a").forEach(a => {
-      a.addEventListener("click", () => {
+    [
+      ...document.querySelectorAll("*[data-toc-ul='jump'] a"),
+    ].map(a => {
+      return {
+        link: a,
+        target: document.querySelector(a.getAttribute("href")),
+      };
+    }).forEach(({ link, target }) => {
+      link.addEventListener("click", event => {
+        event.preventDefault();
         tocContainer.classList.add("hidden");
+        const offsetTop = target == null ? 0 : target.offsetTop;
+        window.scrollTo({ top: offsetTop, behavior: "smooth" });
       });
     });
   }
