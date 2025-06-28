@@ -98,3 +98,14 @@ const themeObserver = async (): Promise<void> => {
 };
 
 themeObserver();
+
+/**
+ * Go to page start after page swap
+ */
+document.addEventListener("astro:after-swap", () =>
+  renderDiagrams(document.getElementsByClassName("mermaid"), getPreferTheme())
+);
+
+document.addEventListener("astro:page-load", () =>
+  renderDiagrams(document.getElementsByClassName("mermaid"), getPreferTheme())
+);
