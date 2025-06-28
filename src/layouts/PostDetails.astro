@@ -462,9 +462,13 @@ const nextPost =
       }
     );
 
-    const targetsObserver = new IntersectionObserver(targets => {
-      targets.forEach(entry => {
-        const href = entry.target.getAttribute("id");
+    const observer = new IntersectionObserver(sections => {
+      sections.forEach(section => {
+        const heading = section.target.querySelector("h1, h2, h3, h4, h5, h6");
+        if (!heading) {
+          return;
+        }
+        const href = heading.getAttribute("id");
         const link = document.querySelector(
           `*[data-toc-ul] a[href="#${href}"]`
         );
@@ -473,7 +477,7 @@ const nextPost =
           return;
         }
 
-        const op = entry.intersectionRatio > 0 ? "add" : "remove";
+        const op = section.intersectionRatio > 0 ? "add" : "remove";
         link.classList[op]("text-wrap");
         link.classList[op]("text-(--accent)");
         link.scrollIntoView({ behavior: "smooth", block: "nearest" });
@@ -487,7 +491,9 @@ const nextPost =
         window.scrollTo({ top: 0 });
         article.scrollTo({ top: offsetTop, behavior: "smooth" });
       });
-      targetsObserver.observe(target);
+    });
+    document.querySelectorAll("#article section").forEach(section => {
+      observer.observe(section);
     });
   }
 

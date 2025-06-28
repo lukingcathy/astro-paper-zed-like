@@ -9,6 +9,7 @@ import {
   transformerNotationWordHighlight,
 } from "@shikijs/transformers";
 import { remarkMermaid } from "./src/plugins/mermaid.ts";
+import { rehypeSectionize } from "./src/plugins/rehype-sectionize.ts";
 import { SITE } from "./src/config.ts";
 
 // https://astro.build/config
@@ -29,6 +30,7 @@ export default defineConfig({
       remarkToc,
       [remarkCollapse, { test: "Table of contents" }],
     ],
+    rehypePlugins: [rehypeSectionize],
     shikiConfig: {
       // For more themes, visit https://shiki.style/themes
       themes: { light: "min-light", dark: "night-owl" },
