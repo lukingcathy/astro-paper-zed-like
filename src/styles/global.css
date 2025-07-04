@@ -12,19 +12,19 @@
 
 :root,
 html[data-theme="light"] {
-  --background: oklch(96.1% 0.0049 220.5);
+  --background: oklch(96.1% 0.0049 220.4);
   --foreground: oklch(24% 0.0096 295.3);
-  --accent: oklch(68.2% 0.1301 220.5);
-  --muted: oklch(85.9% 0.0579 220.5);
-  --border: oklch(92.2% 0.0288 220.5);
+  --accent: oklch(68.2% 0.1301 220.4);
+  --muted: oklch(85.9% 0.0579 220.4);
+  --border: oklch(92.2% 0.0288 220.4);
 }
 
 html[data-theme="dark"] {
   --background: oklch(18.6% 0.0463 220.4);
   --foreground: oklch(94.9% 0.0041 264.4);
   --accent: oklch(47.7% 0.0739 220.4);
-  --muted: oklch(36.1% 0.0628 220.4);
-  --border: oklch(27.1% 0.0393 220.4);
+  --muted: oklch(38.1% 0.0728 220.4);
+  --border: oklch(32.1% 0.0893 220.4);
 }
 
 @theme inline {
