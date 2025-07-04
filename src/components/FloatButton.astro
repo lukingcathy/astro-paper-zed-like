@@ -16,16 +16,16 @@ const hasHeadings = headings.length > 0;
 <div
   id="btt-btn-container"
   class:list={[
-    "fixed right-4 bottom-8 z-40 flex flex-none flex-row-reverse gap-1",
+    "fixed right-4 bottom-44 z-40 flex flex-row-reverse justify-between gap-1",
     "md:sticky md:right-auto md:float-end md:mr-1",
     "translate-y-14 opacity-0 transition duration-500",
   ]}
 >
-  <div class="relative bottom-8 flex flex-none flex-col gap-6">
+  <div class="fixed right-0 bottom-8 flex flex-none flex-col gap-2">
     <button
       data-button="back-to-top"
       class:list={[
-        "group relative bg-background px-2 py-1",
+        "group relative flex-none bg-background px-2 py-1",
         "size-12 rounded-md shadow-xl",
         "md:h-8 md:w-fit md:rounded-md md:shadow-none md:focus-visible:rounded-none",
         "md:bg-background/35 md:bg-clip-padding md:backdrop-blur-lg",
@@ -44,7 +44,7 @@ const hasHeadings = headings.length > 0;
     <button
       data-button="show-toc"
       class:list={[
-        "group relative bg-background px-2 py-1",
+        "group relative flex-none bg-background px-2 py-1",
         "size-12 rounded-md shadow-xl",
         "md:h-8 md:w-fit md:rounded-md md:shadow-none md:focus-visible:rounded-none",
         "md:bg-background/35 md:bg-clip-padding md:backdrop-blur-lg",
@@ -57,10 +57,10 @@ const hasHeadings = headings.length > 0;
     hasHeadings && (
       <div
         id="btt-toc-container"
-        class="fixed right-14 bottom-8 ml-3 hidden h-fit w-[300px] max-w-[300px] overflow-x-auto rounded-md border-1 bg-background text-wrap shadow-xl"
+        class="fixed right-14 bottom-8 z-50 ml-3 hidden h-fit w-73 max-w-80 flex-auto rounded-md border-2 bg-background text-base shadow-xl"
       >
-        <span class="my-4 w-full border-dashed pl-1.5 text-xl">On the pag</span>
-        <div class="pl-2">
+        <span class="my-1 h-fit w-fit border-dashed pl-1.5">On the pag</span>
+        <div class="h-fit w-full pl-2.5 text-wrap">
           <Toc headings={headings} needSmoothScroll={false} />
         </div>
       </div>
@@ -71,7 +71,7 @@ const hasHeadings = headings.length > 0;
 <script is:inline data-astro-rerun>
   /**
    * Scrolls the document to the top when the "Back to Top" button is clicked.
-   * */
+   */
   function backToTop() {
     const rootElement = document.documentElement;
     const btnContainer = document.querySelector("#btt-btn-container");
@@ -117,6 +117,7 @@ const hasHeadings = headings.length > 0;
         btnContainer.classList.toggle("opacity-0", !isVisible);
         btnContainer.classList.toggle("translate-y-14", !isVisible);
         tocContainer.classList.add("hidden");
+        tocContainer.classList.remove(["flex", "flex-col"]);
         lastVisible = isVisible;
       }
     }
@@ -131,21 +132,22 @@ const hasHeadings = headings.length > 0;
         ticking = true;
       }
     });
-    [
-      ...document.querySelectorAll("*[data-toc-ul='jump'] a"),
-    ].map(a => {
-      return {
-        link: a,
-        target: document.querySelector(a.getAttribute("href")),
-      };
-    }).forEach(({ link, target }) => {
-      link.addEventListener("click", event => {
-        event.preventDefault();
-        tocContainer.classList.add("hidden");
-        const offsetTop = target == null ? 0 : target.offsetTop;
-        window.scrollTo({ top: offsetTop, behavior: "smooth" });
+    [...document.querySelectorAll("*[data-toc-ul='jump'] a")]
+      .map(a => {
+        return {
+          link: a,
+          target: document.querySelector(a.getAttribute("href")),
+        };
+      })
+      .forEach(({ link, target }) => {
+        link.addEventListener("click", event => {
+          event.preventDefault();
+          tocContainer.classList.add("hidden");
+          tocContainer.classList.remove(["flex", "flex-col"]);
+          const offsetTop = target == null ? 0 : target.offsetTop;
+          window.scrollTo({ top: offsetTop, behavior: "smooth" });
+        });
       });
-    });
   }
 
   backToTop();
@@ -158,6 +160,8 @@ const hasHeadings = headings.length > 0;
     }
     tocBtn.addEventListener("click", () => {
       tocContainer.classList.toggle("hidden");
+      tocContainer.classList.toggle("flex");
+      tocContainer.classList.toggle("flex-col");
     });
   }
 
