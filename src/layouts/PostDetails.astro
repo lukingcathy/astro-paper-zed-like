@@ -96,11 +96,11 @@ const nextPost =
     >
       <div class="relative px-2 py-6 md:px-6 md:py-8">
         <div
-          class="absolute bottom-[-4.5px] left-[-4.5px] z-50 h-2 w-2 rotate-45 rounded-[1px] border border-blue-200 bg-white dark:border-blue-300/25"
+          class="absolute bottom-[-4.5px] left-[-4.5px] z-30 h-2 w-2 rotate-45 rounded-[1px] border border-blue-200 bg-white dark:border-blue-300/25"
         >
         </div>
         <div
-          class="absolute right-[-4.5px] bottom-[-4.5px] z-50 h-2 w-2 rotate-45 rounded-[1px] border border-blue-200 bg-white dark:border-blue-300/25"
+          class="absolute right-[-4.5px] bottom-[-4.5px] z-30 h-2 w-2 rotate-45 rounded-[1px] border border-blue-200 bg-white dark:border-blue-300/25"
         >
         </div>
         <div id="post-header" class="my-4 w-full bg-background">
@@ -146,13 +146,13 @@ const nextPost =
         >
           <article
             id="article"
-            class="md:shark app-prose w-fit basis-auto sm:prose-sm md:h-lvh md:max-w-none md:grow md:basis-9/12 md:overflow-y-auto md:pr-3 lg:prose-lg xl:prose-xl dark:prose-invert prose-pre:bg-(--shiki-light-bg) dark:prose-pre:bg-(--shiki-dark-bg)"
+            class="md:shark app-prose w-fit basis-auto sm:prose-sm sm:max-w-none md:h-lvh md:w-9/12 md:max-w-none md:grow md:basis-9/12 md:overflow-y-auto md:pr-3 lg:prose-lg xl:prose-xl dark:prose-invert prose-pre:bg-(--shiki-light-bg) dark:prose-pre:bg-(--shiki-dark-bg)"
           >
             <Content />
           </article>
           <aside
             id="post-sidebar"
-            class="hidden md:sticky md:top-[calc(10%+var(--header-height))] md:z-40 md:float-right md:ml-6 md:flex md:flex-none md:basis-3/12 md:flex-col md:gap-1"
+            class="hidden md:sticky md:top-[calc(10%+var(--header-height))] md:z-40 md:float-right md:ml-6 md:flex md:w-3/12 md:flex-none md:basis-3/12 md:flex-col md:gap-1"
           >
             <SidebarToc headings={headings} />
             <hr class="my-6 w-2/3 border-dashed md:w-11/12" />
