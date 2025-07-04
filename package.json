@@ -23,8 +23,6 @@
     "dayjs": "^1.11.13",
     "lodash.kebabcase": "^4.1.1",
     "mermaid": "^11.8.0",
-    "remark-collapse": "^0.1.2",
-    "remark-toc": "^9.0.0",
     "satori": "^0.12.2",
     "sharp": "^0.33.5",
     "svg-toolbelt": "^0.7.0",
@@ -48,6 +46,8 @@
     "prettier": "^3.6.2",
     "prettier-plugin-astro": "^0.14.1",
     "prettier-plugin-tailwindcss": "^0.6.13",
+    "remark-toc": "^9.0.0",
+    "remark-collapse": "^0.1.2",
     "typescript": "^5.8.3",
     "typescript-eslint": "^8.35.1",
     "unist-util-visit": "^5.0.0"
