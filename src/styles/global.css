@@ -12,19 +12,19 @@
 
 :root,
 html[data-theme="light"] {
-  --background: #fdfdfd;
-  --foreground: #282728;
-  --accent: #006cac;
-  --muted: #e6e6e6;
-  --border: #ece9e9;
+  --background: oklch(96.1% 0.0049 220.5);
+  --foreground: oklch(24% 0.0096 295.3);
+  --accent: oklch(68.2% 0.1301 220.5);
+  --muted: oklch(85.9% 0.0579 220.5);
+  --border: oklch(92.2% 0.0288 220.5);
 }
 
 html[data-theme="dark"] {
-  --background: #212737;
-  --foreground: #eaedf3;
-  --accent: #ff6b01;
-  --muted: #343f60bf;
-  --border: #ab4b08;
+  --background: oklch(18.6% 0.0463 220.4);
+  --foreground: oklch(94.9% 0.0041 264.4);
+  --accent: oklch(47.7% 0.0739 220.4);
+  --muted: oklch(36.1% 0.0628 220.4);
+  --border: oklch(27.1% 0.0393 220.4);
 }
 
 @theme inline {
