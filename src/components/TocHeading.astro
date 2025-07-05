@@ -9,7 +9,7 @@ const { heading } = Astro.props;
 
 <li class="mx-auto my-2 list-none">
   <a
-    class="inline text-nowrap text-ellipsis underline decoration-(--accent) underline-offset-2 hover:text-wrap hover:italic hover:text-(--accent)"
+    class="inline text-balance underline decoration-(--accent) decoration-dashed underline-offset-2 hover:text-(--accent) hover:italic hover:decoration-solid"
     href={"#" + heading.slug}
   >
     <span class="me-0.5">{heading.text}</span>
