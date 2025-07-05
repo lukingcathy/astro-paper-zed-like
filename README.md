@@ -14,7 +14,7 @@ Read [the blog posts](https://astro-paper.pages.dev/posts/) or check [the README
 ## 🔥 Features
 
 - [x] type-safe markdown
-- [x] super fast performance
+- [x] superfast performance
 - [x] accessible (Keyboard/VoiceOver)
 - [x] responsive (mobile ~ desktops)
 - [x] SEO-friendly
