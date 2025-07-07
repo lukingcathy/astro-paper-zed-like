@@ -2,6 +2,7 @@
 import { render, type CollectionEntry } from "astro:content";
 import Layout from "@/layouts/Layout.astro";
 import PageLayout from "@/layouts/PageLayout.astro";
+import Background from "@/components/Background.astro";
 import Tag from "@/components/Tag.astro";
 import SidebarToc from "@/components/SidebarToc.astro";
 import Datetime from "@/components/Datetime.astro";
@@ -94,7 +95,9 @@ const nextPost =
       id="post-main-content"
       slot="main-body-slot"
     >
-      <div class="relative px-2 py-6 md:px-6 md:py-8">
+      <div
+        class="via-cream-50/40 relative h-3/12 bg-linear-to-b from-blue-100/10 to-blue-500/3 px-2 py-6 md:px-6 md:py-8 dark:from-blue-500/3 dark:via-transparent dark:to-blue-500/2"
+      >
         <div
           class="absolute bottom-[-4.5px] left-[-4.5px] z-30 h-2 w-2 rotate-45 rounded-[1px] border border-blue-200 bg-white dark:border-blue-300/25"
         >
@@ -103,7 +106,8 @@ const nextPost =
           class="absolute right-[-4.5px] bottom-[-4.5px] z-30 h-2 w-2 rotate-45 rounded-[1px] border border-blue-200 bg-white dark:border-blue-300/25"
         >
         </div>
-        <div id="post-header" class="my-4 w-full bg-background">
+        <Background />
+        <div id="post-header" class="my-4 w-full">
           <BackButton />
           <div
             class:list={[
@@ -114,7 +118,7 @@ const nextPost =
           >
             <h1
               transition:name={slugifyStr(title)}
-              class="inline-block text-2xl font-bold text-accent sm:text-3xl"
+              class="my-6 inline-block text-2xl font-bold text-accent sm:text-3xl"
             >
               {title}
             </h1>

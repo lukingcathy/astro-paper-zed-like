@@ -2,6 +2,7 @@
 import { getCollection } from "astro:content";
 import Layout from "@/layouts/Layout.astro";
 import PageLayout from "@/layouts/PageLayout.astro";
+import Background from "@/components/Background.astro";
 import Socials from "@/components/Socials.astro";
 import LinkButton from "@/components/LinkButton.astro";
 import Card from "@/components/Card.astro";
@@ -17,30 +18,63 @@ const posts = await getCollection("blog");
 const sortedPosts = getSortedPosts(posts);
 const featuredPosts = sortedPosts.filter(({ data }) => data.featured);
 const recentPosts = sortedPosts.filter(({ data }) => !data.featured);
+
+const hasFeaturedPosts = featuredPosts.length > 0;
+const hasRecentPosts = recentPosts.length > 0;
 ---
 
 <Layout>
   <PageLayout>
-    <div slot="main-body-slot">
-      <section id="hero" class="pt-8 pb-6">
-        <h1 class="my-4 inline-block text-4xl font-bold sm:my-8 sm:text-5xl">
-          Mingalaba
-        </h1>
-        <a
-          target="_blank"
-          href="/rss.xml"
-          class="inline-block"
-          aria-label="rss feed"
-          title="RSS Feed"
+    <div
+      slot="main-body-slot"
+      class="relative flex flex-col justify-center-safe"
+    >
+      <div
+        class="via-cream-50/40 relative h-3/12 bg-linear-to-b from-blue-100/10 to-blue-500/3 px-2 py-6 md:px-6 md:py-8 dark:from-blue-500/3 dark:via-transparent dark:to-blue-500/2"
+      >
+        <div
+          class="absolute bottom-[-4.5px] left-[-4.5px] z-30 h-2 w-2 rotate-45 rounded-[1px] border border-blue-200 bg-white dark:border-blue-300/25"
         >
-          <IconRss
-            width={20}
-            height={20}
-            class="scale-125 stroke-accent stroke-3"
-          />
-          <span class="sr-only">RSS Feed</span>
-        </a>
+        </div>
+        <div
+          class="absolute right-[-4.5px] bottom-[-4.5px] z-30 h-2 w-2 rotate-45 rounded-[1px] border border-blue-200 bg-white dark:border-blue-300/25"
+        >
+        </div>
+        <Background />
+        <div
+          class="mx-auto my-12 flex w-full max-w-app flex-col items-center justify-between gap-8 md:max-w-[1200px] md:flex-row!"
+        >
+          <hgroup
+            class="mx-auto flex w-full max-w-xl flex-col items-center gap-1"
+          >
+            <h1
+              class="mb-2 text-center text-2xl font-semibold tracking-wide text-shadow-lg/10"
+            >
+              Mingalaba
+              <a
+                target="_blank"
+                href="/rss.xml"
+                class="inline-block"
+                aria-label="rss feed"
+                title="RSS Feed"
+              >
+                <IconRss
+                  width={20}
+                  height={20}
+                  class="scale-125 stroke-accent stroke-3"
+                />
+                <span class="sr-only">RSS Feed</span>
+              </a>
+            </h1>
+            <p class="text-center italic">Write and update articles</p>
+          </hgroup>
+        </div>
+      </div>
+      <div class="-mx-3 flex items-center justify-center md:-mx-8 lg:-mx-12">
+        <hr class="w-full border-t" />
+      </div>
 
+      <section id="hero" class="pt-12 pb-6">
         <p>
           AstroPaper is a minimal, responsive, accessible and SEO-friendly Astro
           blog theme. This theme follows best practices and provides
@@ -71,12 +105,11 @@ const recentPosts = sortedPosts.filter(({ data }) => !data.featured);
         }
       </section>
 
-      <Hr />
-
       {
-        featuredPosts.length > 0 && (
-          <>
-            <section id="featured" class="pt-12 pb-6">
+        hasFeaturedPosts && (
+          <Hr />
+          <div>
+            <section class="pt-12 pb-6">
               <h2 class="text-2xl font-semibold tracking-wide">Featured</h2>
               <ul>
                 {featuredPosts.map(data => (
@@ -84,19 +117,20 @@ const recentPosts = sortedPosts.filter(({ data }) => !data.featured);
                 ))}
               </ul>
             </section>
-            {recentPosts.length > 0 && <Hr />}
-          </>
+          </div>
         )
       }
 
       {
-        recentPosts.length > 0 && (
+        hasRecentPosts && (
+          <Hr />
           <section id="recent-posts" class="pt-12 pb-6">
             <h2 class="text-2xl font-semibold tracking-wide">Recent Posts</h2>
             <ul>
               {recentPosts.map(
                 (data, index) =>
-                  index < SITE.postPerIndex && <Card variant="h3" {...data} />
+                  index < SITE.postPerIndex &&
+                  <Card variant="h3" {...data} />,
               )}
             </ul>
           </section>

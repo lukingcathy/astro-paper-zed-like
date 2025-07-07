@@ -1,5 +1,6 @@
 ---
 import Breadcrumb from "@/components/Breadcrumb.astro";
+import Background from "@/components/Background.astro";
 import { SITE } from "@/config";
 
 interface StringTitleProp {
@@ -20,28 +21,50 @@ const { props } = Astro;
 const backUrl = SITE.showBackButton ? Astro.url.pathname : "/";
 ---
 
-<div class="pt-8">
-  <Breadcrumb />
+<div class="relative flex flex-col justify-center-safe">
   <div
-    data-backUrl={backUrl}
-    id="main-content"
-    class="mx-auto w-full max-w-app px-4 pb-4"
+    class="via-cream-50/40 relative h-3/12 bg-linear-to-b from-blue-100/10 to-blue-500/3 px-2 py-6 md:px-6 md:py-8 dark:from-blue-500/3 dark:via-transparent dark:to-blue-500/2"
   >
-    {
-      "titleTransition" in props ? (
-        <h1 class="text-2xl font-semibold sm:text-3xl">
-          {props.pageTitle[0]}
-          <span transition:name={props.titleTransition}>
-            {props.pageTitle[1]}
-          </span>
-        </h1>
-      ) : (
-        <h1 class="text-2xl font-semibold sm:text-3xl">{props.pageTitle}</h1>
-      )
-    }
-    <p class="mt-2 mb-6 italic">{props.pageDesc}</p>
-    <slot />
+    <div
+      class="absolute bottom-[-4.5px] left-[-4.5px] z-30 h-2 w-2 rotate-45 rounded-[1px] border border-blue-200 bg-white dark:border-blue-300/25"
+    >
+    </div>
+    <div
+      class="absolute right-[-4.5px] bottom-[-4.5px] z-30 h-2 w-2 rotate-45 rounded-[1px] border border-blue-200 bg-white dark:border-blue-300/25"
+    >
+    </div>
+    <Background />
+    <div
+      data-backUrl={backUrl}
+      id="main-content"
+      class="mx-auto my-12 flex w-full max-w-app flex-col items-center justify-between gap-8 md:max-w-[1200px] md:flex-row!"
+    >
+      <hgroup class="mx-auto flex w-full max-w-xl flex-col items-center gap-1">
+        {
+          "titleTransition" in props ? (
+            <h1 class="mb-2 text-center text-2xl font-semibold tracking-wide">
+              {props.pageTitle[0]}
+              <span transition:name={props.titleTransition}>
+                {props.pageTitle[1]}
+              </span>
+            </h1>
+          ) : (
+            <h1 class="mb-2 text-center text-3xl font-semibold tracking-wide text-shadow-lg/10">
+              {props.pageTitle}
+            </h1>
+          )
+        }
+        <p class="text-center italic">{props.pageDesc}</p>
+      </hgroup>
+    </div>
   </div>
+  <div class="-mx-3 flex items-center justify-center md:-mx-8 lg:-mx-12">
+    <hr class="w-full border-t" />
+  </div>
+  <section class="flex flex-col pt-12 pb-6">
+    <Breadcrumb />
+    <slot />
+  </section>
 </div>
 
 <script>

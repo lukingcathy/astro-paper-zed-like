@@ -1,5 +1,5 @@
 ---
-import Breadcrumb from "@/components/Breadcrumb.astro";
+import Main from "./Main.astro";
 import PageLayout from "./PageLayout.astro";
 import Layout from "./Layout.astro";
 import { SITE } from "@/config";
@@ -16,19 +16,11 @@ const { frontmatter } = Astro.props;
 
 <Layout title={`${frontmatter.title} | ${SITE.title}`}>
   <PageLayout>
-    <div
-      class="relative mx-3 grow border-r border-l md:mx-8 lg:mx-12"
-      slot="breadcrumb"
-    >
-      <Breadcrumb />
-    </div>
-    <section
-      id="about"
-      class="app-prose mb-28 max-w-app prose-img:border-0"
-      slot="main-body-slot"
-    >
-      <h1 class="text-2xl tracking-wider sm:text-3xl">{frontmatter.title}</h1>
-      <slot />
-    </section>
+    <Main pageTitle="About" pageDesc="Read about this" slot="main-body-slot">
+      <div id="about" class="app-prose mb-28 max-w-app prose-img:border-0">
+        <h1 class="text-2xl tracking-wider sm:text-3xl">{frontmatter.title}</h1>
+        <slot />
+      </div>
+    </Main>
   </PageLayout>
 </Layout>
