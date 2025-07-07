@@ -4,10 +4,16 @@ import LinkButton from "./LinkButton.astro";
 import IconShare from "@/assets/icons/IconShare.svg";
 
 const URL = Astro.url;
+
+export interface Props {
+  showShareLinks?: boolean;
+}
+
+const { showShareLinks = true } = Astro.props;
 ---
 
 {
-  SHARE_LINKS.length > 0 && (
+  showShareLinks && SHARE_LINKS.length > 0 && (
     <div class="flex flex-none flex-col items-center justify-center gap-1 sm:items-start">
       <label class="flex flex-auto flex-row items-center-safe gap-1">
         <IconShare />

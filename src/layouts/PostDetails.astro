@@ -156,8 +156,12 @@ const nextPost =
           >
             <SidebarToc headings={headings} />
             <hr class="my-6 w-2/3 border-double md:w-11/12" />
-            <ShareLinks />
-            <hr class="my-6 w-2/3 border-double md:w-11/12" />
+            <ShareLinks showShareLinks={SITE.showShareLinks} />
+            {
+              SITE.showShareLinks && (
+                <hr class="my-6 w-2/3 border-double md:w-11/12" />
+              )
+            }
             <div
               class="flex flex-col flex-wrap items-center justify-center gap-1 sm:items-start"
             >
@@ -237,7 +241,7 @@ const nextPost =
           <ul class="mt-4 mb-8 sm:my-8">
             {tags.map(tag => <Tag tag={slugifyStr(tag)} tagName={tag} />)}
           </ul>
-          <ShareLinks />
+          <ShareLinks showShareLinks={SITE.showShareLinks} />
         </div>
       </div>
       <div class="-mx-3 flex items-center justify-center md:-mx-8 lg:-mx-12">
