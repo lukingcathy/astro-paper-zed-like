@@ -11,7 +11,7 @@ export const SITE = {
   scheduledPostMargin: 15 * 60 * 1000, // 15 minutes
   showArchives: true,
   showBackButton: true, // show back button in post detail
-  showShareLinks: false,
+  showShareLinks: true,
   editPost: {
     enabled: true,
     text: "Suggest Changes",
