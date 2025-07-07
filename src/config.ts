@@ -9,6 +9,7 @@ export const SITE = {
   postPerIndex: 6,
   postPerPage: 6,
   scheduledPostMargin: 15 * 60 * 1000, // 15 minutes
+  showHero: true,
   showArchives: true,
   showBackButton: true, // show back button in post detail
   showShareLinks: true,
