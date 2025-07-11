@@ -13,6 +13,8 @@ import MenuLinkList from "./MenuLinkList.astro";
 import { SITE } from "@/config";
 import { isActivePage } from "@/utils/activePage";
 import { getCurrentPage } from "@/utils/activePage";
+import { getLangFromUrl } from "@/utils/getLangFromUrl";
+import { useTranslations } from "@/utils/useTranslations";
 
 const { pathname } = Astro.url;
 
@@ -24,6 +26,19 @@ const notSearchPage = currentPath !== "/search";
 const isActive = (path: string): boolean => {
   return isActivePage(currentPath, path);
 };
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const post = t("nav.post");
+const tag = t("nav.tag");
+const about = t("nav.about");
+const archive = t("nav.archive");
+const search = t("nav.search");
+const togglesLightAndDark = t("nav.togglesLightAndDark");
+const closeMenu = t("nav.closeMenu");
+const openMenu = t("nav.openMenu");
+const turnDarkModeOn = t("nav.turnDarkModeOn");
 ---
 
 <header
@@ -58,9 +73,11 @@ const isActive = (path: string): boolean => {
         <button
           id="menu-btn"
           class="relative sm:hidden"
-          aria-label="Open Menu"
+          aria-label={openMenu}
           aria-expanded="false"
           aria-controls="menu-items"
+          data-label-open-menu={openMenu}
+          data-label-close-menu={closeMenu}
         >
           <IconX id="close-icon" class="hidden" />
           <IconMenuDeep id="menu-icon" />
@@ -75,18 +92,30 @@ const isActive = (path: string): boolean => {
           ]}
         >
           <li class="col-span-2">
-            <a href="/posts" class:list={{ "active-nav": isActive("/posts") }}>
-              Posts
+            <a
+              href="/posts"
+              class:list={{ "active-nav": isActive("/posts") }}
+              aria-label={post}
+            >
+              {post}
             </a>
           </li>
           <li class="col-span-2">
-            <a href="/tags" class:list={{ "active-nav": isActive("/tags") }}>
-              Tags
+            <a
+              href="/tags"
+              class:list={{ "active-nav": isActive("/tags") }}
+              aria-label={tag}
+            >
+              {tag}
             </a>
           </li>
           <li class="col-span-2">
-            <a href="/about" class:list={{ "active-nav": isActive("/about") }}>
-              About
+            <a
+              href="/about"
+              class:list={{ "active-nav": isActive("/about") }}
+              aria-label={about}
+            >
+              {about}
             </a>
           </li>
           {
@@ -100,11 +129,11 @@ const isActive = (path: string): boolean => {
                       "active-nav [&>svg]:stroke-accent": isActive("/archives"),
                     },
                   ]}
-                  ariaLabel="archives"
-                  title="Archives"
+                  ariaLabel={archive}
+                  title={archive}
                 >
                   <IconArchive class="hidden sm:inline-block" />
-                  <span class="sm:sr-only">Archives</span>
+                  <span class="sm:sr-only">{archive}</span>
                 </LinkButton>
               </li>
             )
@@ -127,8 +156,8 @@ const isActive = (path: string): boolean => {
             <button
               id="theme-btn"
               class="focus-outline relative order-first hover:[&>svg]:stroke-accent"
-              title="Toggles light & dark"
-              aria-label="auto"
+              title={togglesLightAndDark}
+              aria-label={togglesLightAndDark}
               aria-live="polite"
             >
               <IconMoon class="absolute top-[50%] left-[50%] -translate-[50%] scale-100 rotate-0 transition-all dark:scale-0 dark:-rotate-90" />
@@ -153,11 +182,11 @@ const isActive = (path: string): boolean => {
               "focus-outline flex p-3 sm:p-1",
               { "active-nav [&>svg]:stroke-accent": isActive("/search") },
             ]}
-            ariaLabel="Search"
-            title="Search"
+            ariaLabel={search}
+            title={search}
           >
             <IconSearch />
-            Search
+            {search}
           </MenuLink>
           <hr class="my-2 dark:border-gray-600/20" />
         </li>
@@ -167,9 +196,9 @@ const isActive = (path: string): boolean => {
               <button
                 id="menu-theme-btn"
                 class="group fv-style dark:text-offgray-50 border-offgray-200/50 dark:border-offgray-400/20 bg-offgray-50/60 dark:bg-offgray-300/5 hover:bg-offgray-100/50 dark:hover:bg-offgray-200/10 flex h-9 items-center justify-center gap-1.5 rounded-sm border px-3 text-sm tracking-tight text-nowrap [box-shadow:hsl(218,_13%,_50%,_0.1)_0_-2px_0_0_inset] transition-colors duration-75 select-none hover:[box-shadow:none] disabled:cursor-not-allowed disabled:opacity-50 dark:[box-shadow:hsl(218,_13%,_70%,_0.08)_0_-2px_0_0_inset] dark:hover:[box-shadow:none]"
-                aria-label="Turn Dark Mode On"
+                aria-label={turnDarkModeOn}
               >
-                Turn Dark Mode On
+                {turnDarkModeOn}
               </button>
             </li>
           )
@@ -178,10 +207,9 @@ const isActive = (path: string): boolean => {
           <button
             id="menu-drawer-close"
             class="group fv-style dark:text-offgray-50 hover:bg-offgray-100/50 dark:hover:bg-offgray-500/10 flex h-9 w-full items-center justify-center gap-3 rounded-sm border border-transparent px-3 text-base tracking-tight text-nowrap transition-colors duration-75 select-none disabled:cursor-not-allowed disabled:opacity-50"
-            aria-label="Close Menu"
-            type="button"
+            aria-label={closeMenu}
           >
-            Close Menu
+            {closeMenu}
           </button>
         </li>
       </ul>
@@ -210,11 +238,17 @@ const isActive = (path: string): boolean => {
       return;
     }
 
+    const openMenuLabel = menuBtn.dataset.labelOpenMenu;
+    const closeMenuLabel = menuBtn.dataset.labelCloseMenu;
+
     const clickEvent = () => {
       const openMenu = menuBtn.getAttribute("aria-expanded") === "true";
 
       menuBtn.setAttribute("aria-expanded", openMenu ? "false" : "true");
-      menuBtn.setAttribute("aria-label", openMenu ? "Open Menu" : "Close Menu");
+      menuBtn.setAttribute(
+        "aria-label",
+        openMenu ? openMenuLabel : closeMenuLabel
+      );
       menuDrawer.classList.toggle("hidden");
       menuDrawerMask.classList.toggle("hidden");
       menuIcon.classList.toggle("hidden");

@@ -8,6 +8,8 @@ import MenuLink from "./MenuLink.astro";
 import { SITE } from "@/config";
 import { isActivePage } from "@/utils/activePage";
 import { getCurrentPage } from "@/utils/activePage";
+import { getLangFromUrl } from "@/utils/getLangFromUrl";
+import { useTranslations } from "@/utils/useTranslations";
 
 const { pathname } = Astro.url;
 
@@ -17,17 +19,26 @@ const currentPath = getCurrentPage(pathname);
 const isActive = (path: string): boolean => {
   return isActivePage(currentPath, path);
 };
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const goToTheHomePage = t("nav.goToTheHomePage");
+const post = t("nav.post");
+const tag = t("nav.tag");
+const about = t("nav.about");
+const archive = t("nav.archive");
 ---
 
 <li>
   <MenuLink
     href="/"
     class:list={{ "active-nav [&>svg]:stroke-accent": isActive("/") }}
-    ariaLabel="Go to the home page"
-    title="Go to the home page"
+    ariaLabel={goToTheHomePage}
+    title={goToTheHomePage}
   >
     <IconHome />
-    Go to the home page
+    {goToTheHomePage}
   </MenuLink>
   <hr class="my-2 dark:border-gray-600/20" />
 </li>
@@ -37,11 +48,11 @@ const isActive = (path: string): boolean => {
     class:list={{
       "active-nav [&>svg]:stroke-accent": isActive("/posts"),
     }}
-    ariaLabel="Posts"
-    title="Posts"
+    ariaLabel={post}
+    title={post}
   >
     <IconNews />
-    Posts
+    {post}
   </MenuLink>
 </li>
 <li>
@@ -50,11 +61,11 @@ const isActive = (path: string): boolean => {
     class:list={{
       "active-nav [&>svg]:stroke-accent": isActive("/tags"),
     }}
-    ariaLabel="Tags"
-    title="Tags"
+    ariaLabel={tag}
+    title={tag}
   >
     <IconTags />
-    Tags
+    {tag}
   </MenuLink>
 </li>
 <li>
@@ -63,11 +74,11 @@ const isActive = (path: string): boolean => {
     class:list={{
       "active-nav [&>svg]:stroke-accent": isActive("/about"),
     }}
-    ariaLabel="About"
-    title="About"
+    ariaLabel={about}
+    title={about}
   >
     <IconUserExclamation />
-    About
+    {about}
   </MenuLink>
   {!SITE.showArchives && <hr class="my-2 dark:border-gray-600/20" />}
 </li>
@@ -79,11 +90,11 @@ const isActive = (path: string): boolean => {
         class:list={{
           "active-nav [&>svg]:stroke-accent": isActive("/archives"),
         }}
-        ariaLabel="Archives"
-        title="Archives"
+        ariaLabel={archive}
+        title={archive}
       >
         <IconArchive />
-        Archives
+        {archive}
       </MenuLink>
       <hr class="my-2 dark:border-gray-600/20" />
     </li>
