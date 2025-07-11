@@ -19,6 +19,7 @@ export const ui = {
     "nav.closeMenu": "Close Menu",
     "nav.openMenu": "Open Menu",
     "nav.turnDarkModeOn": "Turn Dark Mode On",
+    "nav.turnLightModeOn": "Turn Light Mode On",
   },
   zh: {
     "nav.post": "文章",
@@ -31,5 +32,6 @@ export const ui = {
     "nav.closeMenu": "关闭菜单",
     "nav.openMenu": "打开菜单",
     "nav.turnDarkModeOn": "打开暗色模式",
+    "nav.turnLightModeOn": "打开亮色模式",
   },
 };
