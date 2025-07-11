@@ -1,9 +1,9 @@
 import { SITE } from "@/config";
 
-export const languages = {
-  en: "English",
-  zh: "中文",
-};
+// export const languages = {
+//   en: "English",
+//   zh: "中文",
+// };
 
 export const defaultLang = SITE.lang ?? "en";
 
