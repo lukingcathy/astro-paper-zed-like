@@ -240,8 +240,9 @@ const turnLightModeOn = t("nav.turnLightModeOn");
     ) {
       return;
     }
-
+    // @ts-ignore
     const openMenuLabel = menuBtn.dataset.labelOpenMenu;
+    // @ts-ignore
     const closeMenuLabel = menuBtn.dataset.labelCloseMenu;
 
     const clickEvent = () => {

@@ -32,7 +32,9 @@ const reflectPreference = (): void => {
   const menuThemeBtn = document.querySelector("#menu-theme-btn");
   if (menuThemeBtn) {
     const isLight = themeValue === "light";
+    // @ts-ignore
     const turnLightModeOnLabel = menuThemeBtn.dataset.labelTurnLightModeOn;
+    // @ts-ignore
     const turnDarkModeOnLabel = menuThemeBtn.dataset.labelTurnDarkModeOn;
     const ariaLabel = isLight ? turnLightModeOnLabel : turnDarkModeOnLabel;
     menuThemeBtn.setAttribute("aria-label", ariaLabel);
