@@ -19,6 +19,6 @@ export const SITE = {
     url: "https://github.com/lukingcathy/astro-paper-zed-like/edit/main/",
   },
   dynamicOgImage: true,
-  lang: "zh", // HTML lang code. Set this empty and default will be "en"
+  lang: "en", // HTML lang code. Set this empty and default will be "en"
   timezone: "Asia/Shanghai", // Default global timezone (IANA format) https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
 } as const;
