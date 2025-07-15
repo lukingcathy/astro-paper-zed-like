@@ -38,6 +38,9 @@ export const ui = {
     "search.modelMenuKbdSpanSelect": "Select",
     "post.pageTitle": "Posts",
     "post.pageDesc": "All the articles I've posted.",
+    "tag.pageTitle": "Posts",
+    "tag.pageDesc": "All the articles I've posted.",
+    "tag.subPageDesc": "All the articles with the tag",
   },
   zh: {
     "nav.post": "文章",
@@ -69,5 +72,8 @@ export const ui = {
     "search.modelMenuKbdSpanSelect": "选择",
     "post.pageTitle": "文章",
     "post.pageDesc": "已发布的全部文章",
+    "tag.pageTitle": "标签",
+    "tag.pageDesc": "在全部文章中标记过的标签",
+    "tag.subPageDesc": "使用此标签的文章",
   },
 };
