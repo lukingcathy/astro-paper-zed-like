@@ -20,7 +20,8 @@ import IconHome from "@/assets/icons/IconHome.svg";
 import IconSearch from "@/assets/icons/IconSearch.svg";
 import IconTags from "@/assets/icons/IconTags.svg";
 import { SITE } from "@/config";
-
+import { getLangFromUrl } from "@/utils/getLangFromUrl";
+import { useTranslations } from "@/utils/useTranslations";
 export interface Props {
   post: CollectionEntry<"blog">;
   posts: CollectionEntry<"blog">[];
@@ -86,6 +87,8 @@ const currentPostIndex = allPosts.findIndex(a => a.id === post.id);
 const prevPost = currentPostIndex !== 0 ? allPosts[currentPostIndex - 1] : null;
 const nextPost =
   currentPostIndex !== allPosts.length ? allPosts[currentPostIndex + 1] : null;
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 ---
 
 <Layout {...layoutProps}>
@@ -171,7 +174,7 @@ const nextPost =
             >
               <label class="flex flex-auto flex-row items-center-safe gap-1">
                 <IconTags />
-                <span class="italic">Tags</span>
+                <span class="italic">{t("postDetail.tag")}</span>
               </label>
               <ul>
                 {tags.map(tag => <Tag tag={slugifyStr(tag)} tagName={tag} />)}
@@ -183,7 +186,7 @@ const nextPost =
             >
               <label class="flex flex-auto flex-row items-center-safe gap-1">
                 <IconAlignLeft2 />
-                <span class="italic">Shortcuts</span>
+                <span class="italic">{t("postDetail.shortcut")}</span>
               </label>
               <div class="flex flex-row items-start gap-4">
                 <button
@@ -265,7 +268,7 @@ const nextPost =
               >
                 <IconChevronLeft class="inline-block size-12 flex-none justify-center" />
                 <div>
-                  <span>Previous Post</span>
+                  <span>{t("postDetail.previousPost")}</span>
                   <div class="text-sm text-accent/85">{prevPost.title}</div>
                 </div>
               </a>
@@ -278,7 +281,7 @@ const nextPost =
                 class="flex w-full justify-end gap-1 text-right hover:-top-0.5 hover:text-accent/85 focus-visible:p-1 sm:col-start-2"
               >
                 <div>
-                  <span>Next Post</span>
+                  <span>{t("postDetail.nextPost")}</span>
                   <div class="text-sm text-accent/85">{nextPost.title}</div>
                 </div>
                 <IconChevronRight class="inline-block size-12 flex-none justify-center" />

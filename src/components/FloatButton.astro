@@ -4,13 +4,16 @@ import IconArrowNarrowUp from "@/assets/icons/IconArrowNarrowUp.svg";
 import IconChevronLeft from "@/assets/icons/IconChevronLeft.svg";
 import IconList from "@/assets/icons/IconList.svg";
 import Toc from "./Toc.astro";
-
+import { getLangFromUrl } from "@/utils/getLangFromUrl";
+import { useTranslations } from "@/utils/useTranslations";
 export interface Props {
   headings: MarkdownHeading[];
 }
 
 const { headings } = Astro.props;
 const hasHeadings = headings.length > 0;
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 ---
 
 <div
@@ -38,7 +41,7 @@ const hasHeadings = headings.length > 0;
       <IconChevronLeft class="inline-block rotate-90 md:hidden" />
       <span class="sr-only text-sm group-hover:text-accent md:not-sr-only">
         <IconArrowNarrowUp class="inline-block size-4" />
-        Back To Top
+        {t("floatButton.backToTop")}
       </span>
     </button>
     <button
@@ -59,7 +62,9 @@ const hasHeadings = headings.length > 0;
         id="btt-toc-container"
         class="fixed right-14 bottom-8 z-50 ml-3 hidden h-fit w-73 max-w-80 flex-auto rounded-md border-2 bg-background text-base shadow-xl"
       >
-        <span class="my-1 h-fit w-fit border-dashed pl-1.5">On the pag</span>
+        <span class="my-1 h-fit w-fit border-dashed pl-1.5">
+          {t("floatButton.OnThePage")}
+        </span>
         <div class="h-fit w-full pl-2.5 text-wrap">
           <Toc headings={headings} needSmoothScroll={false} />
         </div>

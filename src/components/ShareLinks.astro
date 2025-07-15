@@ -2,14 +2,17 @@
 import { SHARE_LINKS } from "@/constants";
 import LinkButton from "./LinkButton.astro";
 import IconShare from "@/assets/icons/IconShare.svg";
-
-const URL = Astro.url;
+import { getLangFromUrl } from "@/utils/getLangFromUrl";
+import { useTranslations } from "@/utils/useTranslations";
 
 export interface Props {
   showShareLinks?: boolean;
 }
 
+const URL = Astro.url;
 const { showShareLinks = true } = Astro.props;
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 ---
 
 {
@@ -17,7 +20,7 @@ const { showShareLinks = true } = Astro.props;
     <div class="flex flex-none flex-col items-center justify-center gap-1 sm:items-start">
       <label class="flex flex-auto flex-row items-center-safe gap-1">
         <IconShare />
-        <span class="italic">Share this post on</span>
+        <span class="italic">{t("shareLinks.title")}</span>
       </label>
       <div class="text-center">
         {SHARE_LINKS.map(social => (

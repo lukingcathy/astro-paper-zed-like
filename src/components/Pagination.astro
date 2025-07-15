@@ -4,12 +4,16 @@ import type { CollectionEntry } from "astro:content";
 import IconArrowLeft from "@/assets/icons/IconArrowLeft.svg";
 import IconArrowRight from "@/assets/icons/IconArrowRight.svg";
 import LinkButton from "./LinkButton.astro";
+import { getLangFromUrl } from "@/utils/getLangFromUrl";
+import { useTranslations } from "@/utils/useTranslations";
 
 export interface Props {
   page: Page<CollectionEntry<"blog">>;
 }
 
 const { page } = Astro.props;
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 ---
 
 {
@@ -22,7 +26,7 @@ const { page } = Astro.props;
         ariaLabel="Previous"
       >
         <IconArrowLeft class="inline-block" />
-        Prev
+        {t("pagination.prev")}
       </LinkButton>
       {page.currentPage} / {page.lastPage}
       <LinkButton
@@ -31,7 +35,7 @@ const { page } = Astro.props;
         class:list={["ml-4 select-none", { "opacity-50": !page.url.next }]}
         ariaLabel="Next"
       >
-        Next
+        {t("pagination.next")}
         <IconArrowRight class="inline-block" />
       </LinkButton>
     </nav>

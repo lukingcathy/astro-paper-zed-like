@@ -3,13 +3,16 @@ import type { MarkdownHeading } from "astro";
 import IconList from "@/assets/icons/IconList.svg";
 import IconChevronRight from "@/assets/icons/IconChevronRight.svg";
 import Toc from "./Toc.astro";
-
+import { getLangFromUrl } from "@/utils/getLangFromUrl";
+import { useTranslations } from "@/utils/useTranslations";
 export interface Props {
   headings: MarkdownHeading[];
 }
 
 const { headings } = Astro.props;
 const hasHeadings = headings.length > 0;
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 ---
 
 <>
@@ -22,7 +25,7 @@ const hasHeadings = headings.length > 0;
             class="flex flex-auto flex-row items-center-safe gap-1"
           >
             <IconList />
-            <span class="italic">On This Page</span>
+            <span class="italic">{t("sidebarToc.title")}</span>
             <IconChevronRight
               id="toc-nav-details-summary-chevron"
               class="order-last ml-auto inline-block"
