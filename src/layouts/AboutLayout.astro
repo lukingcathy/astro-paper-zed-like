@@ -3,7 +3,8 @@ import Main from "./Main.astro";
 import PageLayout from "./PageLayout.astro";
 import Layout from "./Layout.astro";
 import { SITE } from "@/config";
-
+import { getLangFromUrl } from "@/utils/getLangFromUrl";
+import { useTranslations } from "@/utils/useTranslations";
 export interface Props {
   frontmatter: {
     title: string;
@@ -12,11 +13,17 @@ export interface Props {
 }
 
 const { frontmatter } = Astro.props;
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 ---
 
 <Layout title={`${frontmatter.title} | ${SITE.title}`}>
   <PageLayout>
-    <Main pageTitle="About" pageDesc="Read about this..." slot="main-body-slot">
+    <Main
+      pageTitle={t("about.pageTitle")}
+      pageDesc={t("about.pageDesc")}
+      slot="main-body-slot"
+    >
       <div id="about" class="app-prose mb-28 max-w-app prose-img:border-0">
         <h1 class="text-2xl tracking-wider sm:text-3xl">{frontmatter.title}</h1>
         <slot />

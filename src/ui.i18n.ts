@@ -41,6 +41,8 @@ export const ui = {
     "tag.pageTitle": "Posts",
     "tag.pageDesc": "All the articles I've posted.",
     "tag.subPageDesc": "All the articles with the tag",
+    "about.pageTitle": "About",
+    "about.pageDesc": "Read about this...",
   },
   zh: {
     "nav.post": "文章",
@@ -75,5 +77,7 @@ export const ui = {
     "tag.pageTitle": "标签",
     "tag.pageDesc": "在全部文章中标记过的标签",
     "tag.subPageDesc": "使用此标签的文章",
+    "about.pageTitle": "关于",
+    "about.pageDesc": "了解一下这个博客",
   },
 };
