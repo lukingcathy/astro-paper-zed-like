@@ -48,6 +48,9 @@ export const ui = {
     "archive.pageTitle": "Archives",
     "archive.pageDesc": "All the articles I've archived.",
     "breadcrumb.firstTag": "Home",
+    "backButton.title": "Go back",
+    "dateTime.updated": "Updated",
+    "dateTime.published": "Published",
   },
   zh: {
     "nav.post": "文章",
@@ -89,6 +92,9 @@ export const ui = {
     "archive.pageTitle": "归档",
     "archive.pageDesc": "全部归档的文章",
     "breadcrumb.firstTag": "首页",
+    "backButton.title": "返回",
+    "dateTime.updated": "更新于",
+    "dateTime.published": "发布于",
   },
 };
 
