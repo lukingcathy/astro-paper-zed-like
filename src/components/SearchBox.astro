@@ -1,11 +1,22 @@
 ---
 import "@pagefind/default-ui/css/ui.css";
 import { SITE } from "@/config";
+import { getLangFromUrl } from "@/utils/getLangFromUrl";
+import { useTranslations } from "@/utils/useTranslations";
 
 const backUrl = SITE.showBackButton ? `${Astro.url.pathname}` : "/";
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const placeholder = t("search.placeholder");
 ---
 
-<div id="pagefind-search" transition:persist data-backurl={backUrl}></div>
+<div
+  id="pagefind-search"
+  transition:persist
+  data-backurl={backUrl}
+  data-placeholder={placeholder}
+>
+</div>
 
 <script>
   function initSearch() {
@@ -34,13 +45,16 @@ const backUrl = SITE.showBackButton ? `${Astro.url.pathname}` : "/";
           `;
       }
 
+      const dataPlaceholder = pageFindSearch.dataset.placeholder;
+      const placeholder = dataPlaceholder ? dataPlaceholder : "Searching...";
+
       // Init pagefind ui
       const search = new PagefindUI({
         element: "#pagefind-search",
         showSubResults: true,
         showImages: false,
         translations: {
-          placeholder: "Searching...",
+          placeholder: placeholder,
         },
         processTerm: function (term: string) {
           params.set("q", term); // Update the `q` parameter in the URL

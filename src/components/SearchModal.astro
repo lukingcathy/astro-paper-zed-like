@@ -3,6 +3,11 @@ import SearchBox from "@/components/SearchBox.astro";
 import Mark from "./Mark.astro";
 import MenuLinkList from "./MenuLinkList.astro";
 import MenuKbd from "./MenuKbd.astro";
+import { getLangFromUrl } from "@/utils/getLangFromUrl";
+import { useTranslations } from "@/utils/useTranslations";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 ---
 
 <Mark id="search-model-mask" />
@@ -23,15 +28,15 @@ import MenuKbd from "./MenuKbd.astro";
         <div class="hidden justify-between gap-2 p-2 px-4 pt-0 text-sm md:flex">
           <div class="flex flex-row gap-1">
             <MenuKbd text="Tab" />
-            <span class="my-1">Move</span>
+            <span class="my-1">{t("search.modelMenuKbdSpanMove")}</span>
           </div>
           <div class="flex flex-row gap-1">
             <MenuKbd text="Esc" />
-            <span class="my-1">Close</span>
+            <span class="my-1">{t("search.modelMenuKbdSpanClose")}</span>
           </div>
           <div class="flex flex-row gap-1">
             <MenuKbd text="Enter" />
-            <span class="my-1">Select</span>
+            <span class="my-1">{t("search.modelMenuKbdSpanSelect")}</span>
           </div>
         </div>
       </li>
