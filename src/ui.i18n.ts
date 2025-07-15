@@ -36,6 +36,8 @@ export const ui = {
     "search.modelMenuKbdSpanMove": "Move",
     "search.modelMenuKbdSpanClose": "Close",
     "search.modelMenuKbdSpanSelect": "Select",
+    "post.pageTitle": "Posts",
+    "post.pageDesc": "All the articles I've posted.",
   },
   zh: {
     "nav.post": "文章",
@@ -65,5 +67,7 @@ export const ui = {
     "search.modelMenuKbdSpanMove": "移动",
     "search.modelMenuKbdSpanClose": "关闭",
     "search.modelMenuKbdSpanSelect": "选择",
+    "post.pageTitle": "文章",
+    "post.pageDesc": "已发布的全部文章",
   },
 };
