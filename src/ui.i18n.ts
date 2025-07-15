@@ -26,6 +26,10 @@ export const ui = {
     "index.featureTitle": "Featured",
     "index.recentPostTitle": "Recent Posts",
     "index.allPostTitle": "All Posts",
+    "404.title": "404",
+    "404.feed": "¯\_(ツ)_/¯",
+    "404.message": "Page Not Found",
+    "404.goBackHome": "Go back home",
   },
   zh: {
     "nav.post": "文章",
@@ -45,5 +49,9 @@ export const ui = {
     "index.featureTitle": "功能介绍",
     "index.recentPostTitle": "最近的文章",
     "index.allPostTitle": "查看全部文章",
+    "404.title": "404",
+    "404.feed": "¯\_(ツ)_/¯",
+    "404.message": "无法跳转这个页面！！！",
+    "404.goBackHome": "回到首页",
   },
 };

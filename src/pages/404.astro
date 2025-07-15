@@ -3,6 +3,16 @@ import Layout from "@/layouts/Layout.astro";
 import PageLayout from "@/layouts/PageLayout.astro";
 import LinkButton from "@/components/LinkButton.astro";
 import { SITE } from "@/config";
+import { getLangFromUrl } from "@/utils/getLangFromUrl";
+import { useTranslations } from "@/utils/useTranslations";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const title = t("404.title");
+const feed = t("404.feed");
+const message = t("404.message");
+const goBackHome = t("404.goBackHome");
 ---
 
 <Layout title={`404 Not Found | ${SITE.title}`}>
@@ -11,14 +21,14 @@ import { SITE } from "@/config";
       class="my-12 flex w-full flex-col items-center justify-center"
       slot="main-body-slot"
     >
-      <h1 class="text-5xl font-bold text-accent md:text-9xl">404</h1>
-      <span aria-hidden="true">¯\_(ツ)_/¯</span>
-      <p class="mt-4 text-2xl sm:text-3xl">Page Not Found</p>
+      <h1 class="text-5xl font-bold text-accent md:text-9xl">{title}</h1>
+      <span aria-hidden="true">{feed}</span>
+      <p class="mt-4 text-2xl sm:text-3xl">{message}</p>
       <LinkButton
         href="/"
         class="my-6 text-lg underline decoration-dashed underline-offset-8"
       >
-        Go back home
+        {goBackHome}
       </LinkButton>
     </div>
   </PageLayout>
