@@ -43,6 +43,8 @@ export const ui = {
     "tag.subPageDesc": "All the articles with the tag",
     "about.pageTitle": "About",
     "about.pageDesc": "Read about this...",
+    "archive.pageTitle": "Archives",
+    "archive.pageDesc": "All the articles I've archived.",
   },
   zh: {
     "nav.post": "文章",
@@ -79,5 +81,42 @@ export const ui = {
     "tag.subPageDesc": "使用此标签的文章",
     "about.pageTitle": "关于",
     "about.pageDesc": "了解一下这个博客",
+    "archive.pageTitle": "归档",
+    "archive.pageDesc": "全部归档的文章",
+  },
+};
+
+export const uiArray = {
+  en: {
+    "archive.month": [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December",
+    ],
+  },
+  zh: {
+    "archive.month": [
+      "一月",
+      "二月",
+      "三月",
+      "四月",
+      "五月",
+      "六月",
+      "七月",
+      "八月",
+      "九月",
+      "十月",
+      "十一月",
+      "十二月",
+    ],
   },
 };

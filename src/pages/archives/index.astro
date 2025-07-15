@@ -6,6 +6,8 @@ import PageLayout from "@/layouts/PageLayout.astro";
 import Card from "@/components/Card.astro";
 import getPostsByGroupCondition from "@/utils/getPostsByGroupCondition";
 import { SITE } from "@/config";
+import { getLangFromUrl } from "@/utils/getLangFromUrl";
+import { useTranslations, useTranslationsArray } from "@/utils/useTranslations";
 
 // Redirect to 404 page if `showArchives` config is false
 if (!SITE.showArchives) {
@@ -13,30 +15,17 @@ if (!SITE.showArchives) {
 }
 
 const posts = await getCollection("blog", ({ data }) => !data.draft);
-
-const months = [
-  "January",
-  "February",
-  "March",
-  "April",
-  "May",
-  "June",
-  "July",
-  "August",
-  "September",
-  "October",
-  "November",
-  "December",
-];
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const tArray = useTranslationsArray(lang);
+const title = t("archive.pageTitle");
+const desc = t("archive.pageDesc");
+const months = tArray("archive.month");
 ---
 
 <Layout title={`Archives | ${SITE.title}`}>
   <PageLayout>
-    <Main
-      pageTitle="Archives"
-      pageDesc="All the articles I've archived."
-      slot="main-body-slot"
-    >
+    <Main pageTitle={title} pageDesc={desc} slot="main-body-slot">
       {
         Object.entries(
           getPostsByGroupCondition(posts, post =>
