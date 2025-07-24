@@ -33,7 +33,7 @@ const { page, tagName } = Astro.props;
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
-const pageTitle = t("tag.pageTitle") + ": " + tagName;
+const pageTitle: [string, string] = [t("tag.pageTitle") + ": ", tagName];
 const pageDesc = t("tag.subPageDesc") + ": " + tagName;
 const tagTitle = t("tag.pageTitle") + ": " + tag;
 ---
